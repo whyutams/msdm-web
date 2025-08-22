@@ -21,6 +21,8 @@
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.css" rel="stylesheet" />
 </head>
 
 <body class="bg-white text-gray-800">
@@ -30,4 +32,5 @@
 
     @include('components/footer')
 
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.js"></script>
 </html>

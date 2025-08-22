@@ -22,17 +22,15 @@
             <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
                 @csrf
                 <div>
-                    <div class="flex justify-center pb-6">
+                    <div class="flex justify-center pb-4">
                         @if(Auth::user()->photo_profile)
-                            <img id="preview-image" src="{{ asset('storage/' . Auth::user()->photo_profile) }}" alt="Profile"
-                                class="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover shadow-lg bg-gray-300">
+                            <img id="preview" src="{{ asset('storage/' . Auth::user()->photo_profile) }}"
+                                class="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover shadow-lg bg-gray-300">
                         @else
-                            <div id="preview-placeholder"
-                                class="md:w-56 md:h-56 w-48 h-48 bg-primary rounded-full flex items-center justify-center text-white font-bold md:text-7xl text-5xl shadow-lg">
+                            <div
+                                class="md:w-48 md:h-48 w-32 h-32 bg-primary rounded-full flex items-center justify-center text-white font-bold md:text-7xl text-5xl shadow-lg">
                                 {{ strtoupper(substr(Auth::user()->callname, 0, 1)) }}
                             </div>
-                            <img id="preview-image"
-                                class="hidden w-48 h-48 md:w-56 md:h-56 rounded-full object-cover shadow-lg bg-gray-300" />
                         @endif
                     </div>
 
@@ -43,27 +41,61 @@
                         </label>
                         <input type="file" name="photo_profile" id="photo_profile" accept="image/*" class="hidden">
                     </div>
+
+                    <div id="cropModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+                        <div class="bg-white rounded-lg w-[95%] max-w-2xl h-[90%] flex flex-col">
+                            <div class="flex-1 overflow-auto flex items-center justify-center p-2">
+                                <img id="cropImage" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <div class="flex justify-end gap-2 p-3 border-t">
+                                <button type="button" id="cancelCrop" class="px-3 py-1 bg-gray-400 rounded">Batal</button>
+                                <button type="button" id="saveCrop"
+                                    class="px-3 py-1 bg-blue-600 text-white rounded">Simpan</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        let cropper
+                        const photoInput = document.getElementById('photo_profile')
+                        const cropModal = document.getElementById('cropModal')
+                        const cropImage = document.getElementById('cropImage')
+                        const cancelCrop = document.getElementById('cancelCrop')
+                        const saveCrop = document.getElementById('saveCrop')
+                        const preview = document.getElementById('preview')
+
+                        photoInput.addEventListener('change', e => {
+                            const file = e.target.files[0]
+                            if (!file) return
+                            const reader = new FileReader()
+                            reader.onload = () => {
+                                cropImage.src = reader.result
+                                cropModal.classList.remove('hidden')
+                                if (cropper) cropper.destroy()
+                                cropper = new Cropper(cropImage, { aspectRatio: 1, viewMode: 1 })
+                            }
+                            reader.readAsDataURL(file)
+                        })
+
+                        cancelCrop.addEventListener('click', () => {
+                            cropModal.classList.add('hidden')
+                            cropper.destroy()
+                        })
+
+                        saveCrop.addEventListener('click', () => {
+                            const canvas = cropper.getCroppedCanvas({ width: 300, height: 300 })
+                            preview.src = canvas.toDataURL('image/png')
+                            canvas.toBlob(blob => {
+                                const file = new File([blob], 'profile.png', { type: 'image/png' })
+                                const dt = new DataTransfer()
+                                dt.items.add(file)
+                                photoInput.files = dt.files
+                            })
+                            cropModal.classList.add('hidden')
+                            cropper.destroy()
+                        })
+                    </script>
                 </div>
-
-                <script>
-                    document.getElementById('photo_profile').addEventListener('change', function (event) {
-                        const file = event.target.files[0];
-                        const previewImage = document.getElementById('preview-image');
-                        const previewPlaceholder = document.getElementById('preview-placeholder');
-
-                        if (file) {
-                            const reader = new FileReader();
-                            reader.onload = function (e) {
-                                previewImage.src = e.target.result;
-                                previewImage.classList.remove('hidden');
-                                if (previewPlaceholder) {
-                                    previewPlaceholder.classList.add('hidden');
-                                }
-                            };
-                            reader.readAsDataURL(file);
-                        }
-                    });
-                </script>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                     <div class="space-y-6">

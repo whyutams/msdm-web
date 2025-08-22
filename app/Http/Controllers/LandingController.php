@@ -183,7 +183,7 @@ class LandingController extends Controller
             'birth_date' => 'required|date',
             'diabetes_type' => 'string|in:1,2,gestasional',
             'password' => 'nullable|min:6|confirmed',
-            'photo_profile' => 'nullable|image|mimes:jpg,jpeg,png'
+            'photo_profile' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
         $data = [
