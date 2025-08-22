@@ -19,6 +19,8 @@
             font-family: 'Inter', sans-serif;
         }
     </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 
 <body class="bg-white text-gray-800">

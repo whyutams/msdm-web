@@ -5,7 +5,7 @@
 @section('content')
 
     <!-- Cerita Section -->
-    <section id="stories" class="py-24 bg-white">
+    <section class="py-24 bg-white">
         <div class="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
             <div class="flex items-center mb-8">
                 <div
@@ -23,7 +23,7 @@
                 natus nihil reprehenderit et placeat! In ratione eveniet nesciunt vero amet? Eaque?</p>
 
             <div class="mt-12">
-                <a href="/#cerita"
+                <a href="/cerita"
                     class="bg-slate-500 text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-slate-600 hover:shadow-lg transition-all duration-200 w-full">
                     Kembali
                 </a>

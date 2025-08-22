@@ -18,8 +18,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'fullname',
+        'callname',
         'email',
+        'no_hp',
+        'photo_profile',
+        'address',
+        'gender',
+        'birth_date',
+        'diabetes_type',
+        'username',
         'password',
     ];
 
@@ -39,6 +47,10 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'birth_date' => 'date',
     ];
+
+    public const ROLE_USER = 'user';
+    public const ROLE_ADMIN = 'admin'; 
+    public const ROLE_SUPERADMIN = 'superadmin'; 
 }

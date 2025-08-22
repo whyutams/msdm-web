@@ -1,6 +1,6 @@
 <footer id="contact" class="bg-gray-100 pt-16 pb-10">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:space-x-2">
 
             <div>
                 <div class="mb-4">
@@ -16,7 +16,7 @@
                         </div>
                     </a>
                 </div>
-                <p class="text-lg text-gray-600">
+                <p class="text-lg text-gray-600 text-justify">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur iusto expedita cupiditate!
                 </p>
             </div>
@@ -27,15 +27,13 @@
                     <li><a href="/#" class="text-gray-700 hover:text-primary transition-colors">Lorem, ipsum.</a></li>
                     <li><a href="/#" class="text-gray-700 hover:text-primary transition-colors">Lorem, ipsum.</a></li>
                     <li><a href="/#" class="text-gray-700 hover:text-primary transition-colors">Lorem, ipsum.</a></li>
-                    <li><a href="/#" class="text-gray-700 hover:text-primary transition-colors">Lorem, ipsum.</a></li>
-                    <li><a href="/#" class="text-gray-700 hover:text-primary transition-colors">Lorem, ipsum.</a></li>
                 </ul>
             </div>
 
             <div>
                 <h4 class="text-xl font-semibold text-gray-800 mb-4">Hubungi Kami</h4>
                 <p class="text-gray-600 mb-4">Email: blabla@gmail.com</p>
-                <div class="flex justify-center md:justify-start space-x-5">
+                <div class="flex justify-start space-x-5">
                     <a href="#" class="text-gray-500 hover:text-primary transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                             <path
@@ -58,7 +56,6 @@
             </div>
         </div>
 
-        <!-- Bottom -->
         <div class="border-t-2 border-gray-200 mt-12 pt-6 text-center">
             <p class="text-gray-600 text-lg">
                 &copy; 2025 MSDM. All Rights Reserved.
