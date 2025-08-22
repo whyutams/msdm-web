@@ -60,7 +60,7 @@
                 </div>
 
                 <div>
-                    <label for="username" class="block text-gray-700 font-medium text-lg mb-1">Username<span
+                    <label for="username" class="block text-gray-700 font-medium text-lg mb-1">Username <span
                             class="text-red-600">*</span></label>
                     <input type="text" id="username" name="username"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
