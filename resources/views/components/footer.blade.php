@@ -58,7 +58,7 @@
 
         <div class="border-t-2 border-gray-200 mt-12 pt-6 text-center">
             <p class="text-gray-600 text-lg">
-                &copy; 2025 MSDM. All Rights Reserved.
+                &copy; TIM BIMA 2025. All Rights Reserved.
             </p>
         </div>
     </div>
