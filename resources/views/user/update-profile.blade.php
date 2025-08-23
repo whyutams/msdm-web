@@ -56,44 +56,51 @@
                     </div>
 
                     <script>
-                        let cropper
-                        const photoInput = document.getElementById('photo_profile')
-                        const cropModal = document.getElementById('cropModal')
-                        const cropImage = document.getElementById('cropImage')
-                        const cancelCrop = document.getElementById('cancelCrop')
-                        const saveCrop = document.getElementById('saveCrop')
-                        const preview = document.getElementById('preview')
+                        $(document).ready(function () {
+                            let cropper;
+                            const photoInput = $('#photo_profile');
+                            const cropModal = $('#cropModal');
+                            const cropImage = $('#cropImage');
+                            const cancelCrop = $('#cancelCrop');
+                            const saveCrop = $('#saveCrop');
+                            const preview = $('#preview');
 
-                        photoInput.addEventListener('change', e => {
-                            const file = e.target.files[0]
-                            if (!file) return
-                            const reader = new FileReader()
-                            reader.onload = () => {
-                                cropImage.src = reader.result
-                                cropModal.classList.remove('hidden')
-                                if (cropper) cropper.destroy()
-                                cropper = new Cropper(cropImage, { aspectRatio: 1, viewMode: 1 })
-                            }
-                            reader.readAsDataURL(file)
-                        })
+                            photoInput.on('change', function (e) {
+                                const file = e.target.files[0];
+                                if (!file) return;
 
-                        cancelCrop.addEventListener('click', () => {
-                            cropModal.classList.add('hidden')
-                            cropper.destroy()
-                        })
+                                const reader = new FileReader();
+                                reader.onload = function () {
+                                    cropImage.attr('src', reader.result);
+                                    cropModal.removeClass('hidden');
 
-                        saveCrop.addEventListener('click', () => {
-                            const canvas = cropper.getCroppedCanvas({ width: 300, height: 300 })
-                            preview.src = canvas.toDataURL('image/png')
-                            canvas.toBlob(blob => {
-                                const file = new File([blob], 'profile.png', { type: 'image/png' })
-                                const dt = new DataTransfer()
-                                dt.items.add(file)
-                                photoInput.files = dt.files
-                            })
-                            cropModal.classList.add('hidden')
-                            cropper.destroy()
-                        })
+                                    if (cropper) cropper.destroy();
+                                    cropper = new Cropper(cropImage[0], { aspectRatio: 1, viewMode: 1 });
+                                };
+                                reader.readAsDataURL(file);
+                            });
+
+                            cancelCrop.on('click', function () {
+                                cropModal.addClass('hidden');
+                                photoInput.val('');
+                                if (cropper) cropper.destroy();
+                            });
+
+                            saveCrop.on('click', function () {
+                                const canvas = cropper.getCroppedCanvas({ width: 300, height: 300 });
+                                preview.attr('src', canvas.toDataURL('image/png'));
+
+                                canvas.toBlob(function (blob) {
+                                    const file = new File([blob], 'profile.png', { type: 'image/png' });
+                                    const dt = new DataTransfer();
+                                    dt.items.add(file);
+                                    photoInput[0].files = dt.files;
+                                });
+
+                                cropModal.addClass('hidden');
+                                cropper.destroy();
+                            });
+                        });
                     </script>
                 </div>
 
@@ -104,7 +111,7 @@
                                 Nama Lengkap <span class="text-red-600">*</span>
                             </label>
                             <input type="text" id="fullname" name="fullname"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none @error('fullname') border-red-600 @enderror"
                                 placeholder="Masukkan nama lengkap" value="{{ old('fullname', Auth::user()->fullname) }}"
                                 required>
                         </div>
@@ -114,7 +121,7 @@
                                 Nama Panggilan <span class="text-red-600">*</span>
                             </label>
                             <input type="text" id="callname" name="callname"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none @error('callname') border-red-600 @enderror"
                                 placeholder="Masukkan nama panggilan" value="{{ old('callname', Auth::user()->callname) }}"
                                 required>
                         </div>
@@ -144,7 +151,7 @@
                                 Nomor HP <span class="text-red-600">*</span>
                             </label>
                             <input type="text" id="no_hp" name="no_hp"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none @error('no_hp') border-red-600 @enderror"
                                 placeholder="Masukkan nomor HP" value="{{ old('no_hp', Auth::user()->no_hp) }}" required>
                         </div>
 
@@ -153,7 +160,7 @@
                                 Email <span class="text-red-600"></span>
                             </label>
                             <input type="text" id="email" name="email"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none @error('email') border-red-600 @enderror"
                                 placeholder="Masukkan email" value="{{ old('email', Auth::user()->email ?? '') }}">
                         </div>
                     </div>
@@ -165,7 +172,7 @@
                             </label>
 
                             <input type="date" id="birth_date" name="birth_date"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none @error('birth_date') border-red-600 @enderror"
                                 value="{{ old('birth_date', \Carbon\Carbon::parse(Auth::user()->birth_date)->format('Y-m-d') ?? '')}}"
                                 required>
                         </div>
@@ -176,7 +183,7 @@
                             </label>
 
                             <textarea rows="3" name="address" id="address"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none @error('address') border-red-600 @enderror"
                                 placeholder="Masukkan alamat"
                                 required>{{ old('address', Auth::user()->address ?? '') }}</textarea>
                         </div>
