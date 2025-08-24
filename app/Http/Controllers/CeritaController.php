@@ -32,7 +32,7 @@ class CeritaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "cerita" => "string|required"
+            "cerita" => "string|required|min:100"
         ]);
 
         Cerita::create([
@@ -73,7 +73,7 @@ class CeritaController extends Controller
         }
 
         $request->validate([
-            "cerita" => "string|required"
+            "cerita" => "string|required|min:100"
         ]);
 
         $cerita->update([
