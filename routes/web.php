@@ -3,6 +3,7 @@
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Spatie\FlareClient\Http\Exceptions\NotFound;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [LandingController::class, 'index'])->name('index');
+Route::get('/logout', function () {return abort(404, 'Not Found');});
 Route::post('/logout', [LandingController::class, 'logout'])->name('logout');
 Route::get('/cerita', [LandingController::class, 'cerita'])->name('cerita');
 Route::get('/cerita/{cerita}', [LandingController::class, 'detail'])->name('detail');
