@@ -12,7 +12,7 @@
 
         @auth
             {{-- Reminder --}}
-            <div class="absolute max-w-6xl mx-auto top-12 left-0 right-0 px-4 sm:px-8 lg:px-12">
+            <div class="absolute max-w-6xl mx-auto top-12 left-0 right-0 px-6 sm:px-8 lg:px-12">
                 <div
                     class="max-w-6xl mx-auto bg-gray-50 border border-slate-400 shadow-md rounded-xl p-4 flex items-center justify-between">
                     <div>

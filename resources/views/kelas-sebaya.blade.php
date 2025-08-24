@@ -7,7 +7,7 @@
     <!-- Kelas Sebaya Section -->
     <section id="stories" class="pb-24 pt-12 bg-white">
         <div class="max-w-[100rem] mx-auto px-6 sm:px-8 lg:px-12">
-            <div class="max-w-6xl flex justify-center mx-auto px-6 sm:px-8 lg:px-12">
+            <div class="max-w-6xl flex justify-center mx-auto lg:px-12">
                 @auth
                     {{-- Reminder --}}
                     <div
