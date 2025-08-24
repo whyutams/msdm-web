@@ -5,12 +5,12 @@
 @section('content')
 
     <!-- Cerita Section -->
-    <section class="py-24 bg-white">
+    <section class="pb-24 pt-12 bg-white">
         <div class="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
             @auth
                 {{-- Reminder --}}
                 <div
-                    class="w-full max-w-6xl mx-auto mb-12 bg-gray-50 border border-slate-400 shadow-md rounded-xl p-4 flex items-center justify-between">
+                    class="w-full mx-auto mb-12 bg-gray-50 border border-slate-400 shadow-md rounded-xl p-4 flex items-center justify-between">
                     <div>
                         <div class="relative w-16 h-16">
                             <svg class="w-16 h-16 transform -rotate-90">
