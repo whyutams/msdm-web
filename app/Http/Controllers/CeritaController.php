@@ -56,6 +56,10 @@ class CeritaController extends Controller
      */
     public function edit(Cerita $cerita)
     {
+        if (Auth::id() != $cerita->user_id) {
+            return abort('404', 'Not Found');
+        }
+
         return view("cerita.edit", compact('cerita'));
     }
 
@@ -76,7 +80,7 @@ class CeritaController extends Controller
             "cerita" => $request->cerita
         ]);
 
-        return redirect()->route('cerita.show', ['cerita'=>$cerita->id])->with('success', 'Cerita diperbarui.');
+        return redirect()->route('cerita.show', ['cerita' => $cerita->id])->with('success', 'Cerita diperbarui.');
     }
 
     /**
