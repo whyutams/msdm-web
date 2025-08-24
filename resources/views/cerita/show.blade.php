@@ -102,18 +102,29 @@
                 {{ strip_tags($cerita->cerita) }}
             </p>
 
-            <div class="mt-12 flex justify-between space-x-4">
+            <div class="mt-12 flex lg:justify-between justify-center flex-wrap gap-4">
                 <a href="{{ route('cerita') }}"
                     class="bg-slate-500 text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-slate-600 hover:shadow-lg transition-all duration-200 w-60 text-center">
                     Kembali
                 </a>
+
                 @if (Auth::id() == $cerita->user_id)
+                    <form action="{{route('cerita.delete', ['cerita' => $cerita->id])}}" method="POST"
+                        onsubmit="return confirm('Yakin ingin menghapus cerita?')">
+                        @csrf
+                        <button
+                            class="bg-red-500 text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-red-600 hover:shadow-lg transition-all duration-200 w-60 text-center">
+                            Hapus Cerita
+                        </button>
+                    </form>
+
                     <a href="{{route('cerita.edit', ['cerita' => $cerita->id])}}"
                         class="bg-primary text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-blue-800 hover:shadow-lg transition-all duration-200 w-60 text-center">
                         Ubah Cerita
                     </a>
                 @endif
             </div>
+
         </div>
     </section>
 

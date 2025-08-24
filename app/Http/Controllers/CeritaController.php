@@ -88,6 +88,12 @@ class CeritaController extends Controller
      */
     public function destroy(Cerita $cerita)
     {
-        //
+        if (Auth::id() != $cerita->user_id) {
+            return abort('404', 'Not Found');
+        }
+
+        $cerita->delete();
+
+        return redirect()->route('cerita')->with('success', 'Cerita berhasil dihapus.');
     }
 }

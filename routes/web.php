@@ -27,6 +27,7 @@ Route::post('/cerita/add', [CeritaController::class, 'store'])->name('cerita.add
 Route::get('/cerita/{cerita}', [CeritaController::class, 'show'])->name('cerita.show');
 Route::get('/cerita/{cerita}/edit', [CeritaController::class, 'edit'])->name('cerita.edit')->middleware('auth');
 Route::post('/cerita/{cerita}/edit', [CeritaController::class, 'update'])->name('cerita.edit.submit')->middleware('auth');
+Route::post('/cerita/{cerita}/delete', [CeritaController::class, 'destroy'])->name('cerita.delete')->middleware('auth');
 Route::get('/kelas-sebaya', [LandingController::class, 'kelas_sebaya'])->name('kelas-sebaya');
 
 Route::middleware('guest')->group(function () {
