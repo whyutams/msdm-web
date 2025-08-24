@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CeritaController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -17,10 +18,15 @@ use Spatie\FlareClient\Http\Exceptions\NotFound;
 */
 
 Route::get('/', [LandingController::class, 'index'])->name('index');
-Route::get('/logout', function () {return abort(404, 'Not Found');});
+Route::get('/logout', function () {
+    return abort(404, 'Not Found'); });
 Route::post('/logout', [LandingController::class, 'logout'])->name('logout');
-Route::get('/cerita', [LandingController::class, 'cerita'])->name('cerita');
-Route::get('/cerita/{cerita}', [LandingController::class, 'detail'])->name('detail');
+Route::get('/cerita', [CeritaController::class, 'index'])->name('cerita');
+Route::get('/cerita/add', [CeritaController::class, 'create'])->name('cerita.add')->middleware('auth');
+Route::post('/cerita/add', [CeritaController::class, 'store'])->name('cerita.add.submit')->middleware('auth');
+Route::get('/cerita/{cerita}', [CeritaController::class, 'show'])->name('cerita.show');
+Route::get('/cerita/{cerita}/edit', [CeritaController::class, 'edit'])->name('cerita.edit')->middleware('auth');
+Route::post('/cerita/{cerita}/edit', [CeritaController::class, 'update'])->name('cerita.edit.submit')->middleware('auth');
 Route::get('/kelas-sebaya', [LandingController::class, 'kelas_sebaya'])->name('kelas-sebaya');
 
 Route::middleware('guest')->group(function () {
@@ -35,5 +41,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/update', [ProfileController::class, 'update_profile'])->name('profile.form');
     Route::post('/profile/update', [ProfileController::class, 'proses_update_profile'])->name('profile.update');
     Route::get('/mytask', [ProfileController::class, 'task'])->name('task');
+
     Route::get('/dashboard', [LandingController::class, 'index'])->name('dashboard');
 });

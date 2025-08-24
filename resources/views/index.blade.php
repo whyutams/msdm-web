@@ -95,73 +95,61 @@
     </section>
 
     <!-- Cerita Section -->
-    <section id="stories" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <div class="text-center mb-20">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-8">
-                    Cerita Pengalaman
-                </h2>
-                <p class="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut minima laboriosam quisquam porro nisi.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div
-                    class="bg-gray-50 rounded-3xl p-10 shadow hover:shadow-lg transition-all duration-300 border border-gray-200 h-full">
-                    <div class="flex items-center mb-8">
-                        <div
-                            class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                            M
-                        </div>
-                        <div class="ml-6">
-                            <h3 class="font-semibold text-gray-800 text-xl">Lorem, ipsum.</h3>
-                            <p class="text-base text-gray-600 mt-2">Diabetes Menengah</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 leading-relaxed mb-8 text-lg line-clamp-3 text-justify">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi tempore repudiandae aut totam qui
-                        fuga aliquam eos ducimus in possimus, repellendus sint voluptatem doloribus adipisci, distinctio
-                        sequi ipsa deserunt quasi quia, maxime voluptas dolorem obcaecati? Perspiciatis repellendus
-                        architecto aperiam neque nulla! Mollitia sed aut veritatis tempore error unde odio enim.
+    @if ($ceritas->count() > 0)
+        <section id="stories" class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+                <div class="text-center mb-20">
+                    <h2 class="text-3xl md:text-4xl font-bold text-primary mb-8">
+                        Cerita Pengalaman
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut minima laboriosam quisquam porro nisi.
                     </p>
-                    <a href="{{url('/cerita/1')}}"
-                        class="bg-secondary text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-blue-600 hover:shadow-lg transition-all duration-200 w-full">
-                        Lihat Selengkapnya
-                    </a>
                 </div>
-                <div
-                    class="bg-gray-50 rounded-3xl p-10 shadow hover:shadow-lg transition-all duration-300 border border-gray-200 h-full">
-                    <div class="flex items-center mb-8">
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    @foreach($ceritas as $index => $cerita)
                         <div
-                            class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                            M
+                            class="bg-gray-50 rounded-3xl p-10 shadow hover:shadow-lg transition-all duration-300 border border-gray-200 h-full">
+                            <div class="flex items-center mb-8">
+                                <div class="w-20 h-20 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden">
+                                    @if($cerita->user->photo_profile)
+                                        <img src="{{ asset(path: 'storage/' . $cerita->user->photo_profile) }}" alt="Profile"
+                                            class="w-full h-full object-cover">
+                                    @else
+                                        <span
+                                            class="text-white font-bold text-4xl bg-primary w-full h-full flex items-center justify-center rounded-full">
+                                            {{ strtoupper(substr($cerita->user->callname, 0, 1)) }}
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="ml-6">
+                                    <h3 class="font-semibold text-gray-800 text-xl">{{ $cerita->user->callname }}</h3>
+                                    <h6 class="font-semibold text-gray-600 mb-2 text-base">{{ $cerita->user->fullname }}</h6>
+                                    <p class="text-base text-gray-600">Tipe {{ $cerita->user->diabetes_type }}</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 leading-relaxed mb-8 text-lg line-clamp-2 text-justify">
+                                {{ strip_tags($cerita->cerita) }}
+                            </p>
+                            <a href="{{url('/cerita/' . $cerita->id)}}"
+                                class="bg-secondary text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-blue-600 hover:shadow-lg transition-all duration-200 w-full">
+                                Lihat Selengkapnya
+                            </a>
                         </div>
-                        <div class="ml-6">
-                            <h3 class="font-semibold text-gray-800 text-xl">Lorem, ipsum.</h3>
-                            <p class="text-base text-gray-600 mt-2">Diabetes Menengah</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 leading-relaxed mb-8 text-lg line-clamp-3 text-justify">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi tempore repudiandae aut totam qui
-                        fuga aliquam eos ducimus in possimus, repellendus sint voluptatem doloribus adipisci, distinctio
-                        sequi ipsa deserunt quasi quia, maxime voluptas dolorem obcaecati? Perspiciatis repellendus
-                        architecto aperiam neque nulla! Mollitia sed aut veritatis tempore error unde odio enim.
-                    </p>
-                    <a href="{{url('/cerita/1')}}"
-                        class="bg-secondary text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-blue-600 hover:shadow-lg transition-all duration-200 w-full">
-                        Lihat Selengkapnya
+
+                    @endforeach
+                </div>
+
+                <div class="flex justify-center mt-20">
+                    <a href="{{url("/cerita")}}"
+                        class="bg-primary text-white px-16 py-5 rounded-2xl text-lg font-semibold hover:bg-blue-800 hover:shadow-xl transform transition-all duration-300 shadow">
+                        Lihat Semua Cerita
                     </a>
                 </div>
             </div>
-
-            <div class="flex justify-center mt-20">
-                <a href="{{url("/cerita")}}"
-                    class="bg-primary text-white px-16 py-5 rounded-2xl text-lg font-semibold hover:bg-blue-800 hover:shadow-xl transform transition-all duration-300 shadow">
-                    Lihat Semua Cerita
-                </a>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
 @endsection

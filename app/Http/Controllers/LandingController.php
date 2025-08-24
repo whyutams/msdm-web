@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cerita;
 use App\Models\sc;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -17,10 +18,12 @@ class LandingController extends Controller
      */
     public function index()
     {
+        $ceritas = Cerita::with('user')->limit(2)->latest()->get();
+
         if (User::ROLE_SUPERADMIN || User::ROLE_ADMIN) {
-            return view('index');
+            return view('index', compact('ceritas'));
         } else {
-            return view('index');
+            return view('index', compact('ceritas'));
         }
     } 
 

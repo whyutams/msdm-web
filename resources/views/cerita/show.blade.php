@@ -72,26 +72,47 @@
                 {{-- Reminder END --}}
             @endauth
 
+            @if(session('success'))
+                <div class="max-w-6xl mx-auto">
+                    <div class="mb-10 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                        {{ session('success') }}
+                    </div>
+                </div>
+            @endif
+
             <div class="flex items-center mb-8">
-                <div
-                    class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                    M
+                <div class="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden">
+                    @if($cerita->user->photo_profile)
+                        <img src="{{ asset(path: 'storage/' . $cerita->user->photo_profile) }}" alt="Profile"
+                            class="w-full h-full object-cover">
+                    @else
+                        <span
+                            class="text-white font-bold text-4xl bg-primary w-full h-full flex items-center justify-center rounded-full">
+                            {{ strtoupper(substr($cerita->user->callname, 0, 1)) }}
+                        </span>
+                    @endif
                 </div>
                 <div class="ml-6">
-                    <h3 class="font-semibold text-gray-800 text-xl">Lorem, ipsum.</h3>
-                    <p class="text-base text-gray-600 mt-2">Diabetes Menengah</p>
+                    <h3 class="font-semibold text-gray-800 text-2xl">{{ $cerita->user->callname }}</h3>
+                    <h6 class="font-semibold text-gray-600 mb-2 text-lg">{{ $cerita->user->fullname }}</h6>
+                    <p class="text-lg text-gray-600">Tipe {{ $cerita->user->diabetes_type }}</p>
                 </div>
             </div>
-            <p class="text-lg">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro, officiis, qui tempora
-                nostrum facere, laudantium voluptate magni eligendi officia quo odit. Expedita, aliquid maiores. Rem odit
-                quibusdam labore commodi similique fugiat temporibus, vitae maiores ipsam laboriosam voluptatibus quas,
-                natus nihil reprehenderit et placeat! In ratione eveniet nesciunt vero amet? Eaque?</p>
+            <p class="text-gray-700 leading-relaxed mb-8 text-lg text-justify">
+                {{ strip_tags($cerita->cerita) }}
+            </p>
 
-            <div class="mt-12">
-                <a href="/cerita"
-                    class="bg-slate-500 text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-slate-600 hover:shadow-lg transition-all duration-200 w-full">
+            <div class="mt-12 flex justify-between space-x-4">
+                <a href="{{ route('cerita') }}"
+                    class="bg-slate-500 text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-slate-600 hover:shadow-lg transition-all duration-200 w-60 text-center">
                     Kembali
                 </a>
+                @if (Auth::id() == $cerita->user_id)
+                    <a href="{{route('cerita.edit', ['cerita' => $cerita->id])}}"
+                        class="bg-primary text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-blue-800 hover:shadow-lg transition-all duration-200 w-60 text-center">
+                        Ubah Cerita
+                    </a>
+                @endif
             </div>
         </div>
     </section>
