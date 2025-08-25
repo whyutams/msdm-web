@@ -1,3 +1,8 @@
+@php
+    use Carbon\Carbon;
+    Carbon::setLocale('id'); 
+@endphp
+
 @extends('layouts.home')
 
 @section('title', 'Detail Cerita')
@@ -98,6 +103,10 @@
                     <p class="text-lg text-gray-600">Tipe {{ $cerita->user->diabetes_type }}</p>
                 </div>
             </div>
+
+            <p class="text-primary"><i class="fas fa-calendar mr-1 mb-4"></i>
+                {{ Carbon::parse($cerita->created_at)->translatedFormat('d M Y') }}</p>
+
             <p class="text-gray-700 leading-relaxed mb-8 text-lg text-justify">
                 {{ strip_tags($cerita->cerita) }}
             </p>

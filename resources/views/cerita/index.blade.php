@@ -1,3 +1,8 @@
+@php
+    use Carbon\Carbon;
+    Carbon::setLocale('id'); 
+@endphp
+
 @extends('layouts.home')
 
 @section('title', 'Cerita')
@@ -111,14 +116,14 @@
             </div>
 
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            <div id="cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse($ceritas as $index => $cerita)
                     <div
-                        class="bg-gray-50 rounded-3xl p-10 shadow hover:shadow-lg transition-all duration-300 border border-gray-200 h-full">
+                        class="card bg-gray-50 rounded-3xl p-10 shadow hover:shadow-lg transition-all duration-300 border border-gray-200 h-full">
                         <div class="flex items-center mb-8">
                             <div class="w-20 h-20 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden">
                                 @if($cerita->user->photo_profile)
-                                    <img src="{{ asset(path: 'storage/' . $cerita->user->photo_profile) }}" alt="Profile"
+                                    <img src="{{ asset('storage/' . $cerita->user->photo_profile) }}" alt="Profile"
                                         class="w-full h-full object-cover">
                                 @else
                                     <span
@@ -133,26 +138,41 @@
                                 <p class="text-base text-gray-600">Tipe {{ $cerita->user->diabetes_type }}</p>
                             </div>
                         </div>
-                        
+
                         <p class="text-gray-700 leading-relaxed mb-8 text-lg line-clamp-2 text-justify">
                             {{ strip_tags($cerita->cerita) }}
                         </p>
-
-                        <a href="{{url('/cerita/' . $cerita->id)}}"
-                            class="bg-secondary text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-blue-600 hover:shadow-lg transition-all duration-200 w-full">
-                            Lihat Selengkapnya
-                        </a>
-                    </div>
-                @empty
+                        <div class="flex justify-between">
+                            <div>
+                                <a href="{{url('/cerita/' . $cerita->id)}}"
+                                    class="bg-secondary text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-blue-600 hover:shadow-lg transition-all duration-200 w-full">
+                                    Lihat Selengkapnya
+                                </a>
+                            </div>
+                            <small class="text-primary"><i class="fas fa-calendar mr-1"></i> {{ Carbon::parse($cerita->created_at)->translatedFormat('d M Y') }}</small>
                         </div>
                     </div>
-                    <div class="flex flex-col justify-center pt-16">
+                @empty
+                    <div class="flex flex-col justify-center pt-16 col-span-3">
                         <p class="text-gray-600 text-lg text-center">Belum ada cerita yang dibagikan.</p>
-                        <small class="text-center"><a href="{{ url('/cerita/add') }}"
-                                class="text-secondary hover:underline text-base"><i class="fas fa-pen mr-2 text-secondary"></i>Buat
-                                cerita Anda.</a></small>
+                        <small class="text-center">
+                            <a href="{{ url('/cerita/add') }}" class="text-secondary hover:underline text-base">
+                                <i class="fas fa-pen mr-2 text-secondary"></i>Buat cerita Anda.
+                            </a>
+                        </small>
                     </div>
                 @endforelse
+            </div>
+
+            <script>
+                document.getElementById("search").addEventListener("keyup", function () {
+                    let value = this.value.toLowerCase();
+                    document.querySelectorAll("#cards .card").forEach(function (card) {
+                        let text = card.innerText.toLowerCase();
+                        card.style.display = text.includes(value) ? "block" : "none";
+                    });
+                });
+            </script>
     </section>
 
 @endsection
