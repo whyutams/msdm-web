@@ -95,8 +95,8 @@
                     Cerita Pengalaman
                 </h2>
                 <p class="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut minima laboriosam quisquam porro nisi.
-                </p>
+                    Kisah nyata para penyandang Diabetes Melitus membantu kita memahami perjuangan mereka.
+                    Dari pengalaman ini, kita bisa belajar, termotivasi, dan saling menguatkan untuk hidup lebih sehat. </p>
             </div>
 
             <div class="flex justify-between items-center mb-12">
@@ -149,7 +149,8 @@
                                     Lihat Selengkapnya
                                 </a>
                             </div>
-                            <small class="text-primary"><i class="fas fa-calendar mr-1"></i> {{ Carbon::parse($cerita->created_at)->translatedFormat('d M Y') }}</small>
+                            <small class="text-primary"><i class="fas fa-calendar mr-1"></i>
+                                {{ Carbon::parse($cerita->created_at)->translatedFormat('d M Y') }}</small>
                         </div>
                     </div>
                 @empty
