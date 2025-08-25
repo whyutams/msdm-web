@@ -16,7 +16,7 @@
             </div>
 
             <nav class="hidden md:flex space-x-4">
-                <a href="/#home"
+                <a href="/#"
                     class="text-gray-700 hover:text-primary text-lg px-4 py-2 rounded-lg hover:bg-blue-50 transition-all duration-200">Beranda</a>
                 <a href="{{ route('cerita') }}"
                     class="text-gray-700 hover:text-primary text-lg px-4 py-2 rounded-lg hover:bg-blue-50 transition-all duration-200">Cerita</a>
@@ -80,7 +80,7 @@
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="hidden md:hidden pb-6">
             <div class="flex flex-col space-y-4">
-                <a href="/#home"
+                <a href="/#"
                     class="text-gray-700 hover:text-primary text-lg px-4 py-3 rounded-lg hover:bg-blue-50 transition-all duration-200">Beranda</a>
                 <a href="{{ route('cerita') }}"
                     class="text-gray-700 hover:text-primary text-lg px-4 py-3 rounded-lg hover:bg-blue-50 transition-all duration-200">Cerita</a>
