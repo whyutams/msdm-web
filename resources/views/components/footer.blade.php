@@ -27,18 +27,18 @@
                 <div>
                     <h4 class="text-xl font-semibold text-gray-800 mb-4">Quick Links</h4>
                     <ul class="space-y-3">
-                        <li><a href="/#" class="text-gray-700 hover:text-primary transition-colors">Lorem, ipsum.</a>
+                        <li><a href="{{url('/cerita')}}"
+                                class="text-gray-700 hover:text-primary transition-colors">Cerita</a>
                         </li>
-                        <li><a href="/#" class="text-gray-700 hover:text-primary transition-colors">Lorem, ipsum.</a>
-                        </li>
-                        <li><a href="/#" class="text-gray-700 hover:text-primary transition-colors">Lorem, ipsum.</a>
+                        <li><a href="{{url('/kelas-sebaya')}}"
+                                class="text-gray-700 hover:text-primary transition-colors">Kelas Sebaya</a>
                         </li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-xl font-semibold text-gray-800 mb-4">Hubungi Kami</h4>
-                    <p class="text-gray-600 mb-4">Email: blabla@gmail.com</p>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4">Contact Us</h4>
+                    <p class="text-gray-600 mb-4">Email: msdm2025@gmail.com</p>
                     <div class="flex justify-start space-x-5">
                         <a href="#" class="text-gray-500 hover:text-primary transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor"
