@@ -37,7 +37,7 @@
                     <label for="username" class="block text-gray-700 font-medium text-lg mb-1">Username <span
                             class="text-red-600">*</span></label>
                     <input type="text" id="username" name="username"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-secondary focus:outline-none"
                         placeholder="Masukkan username" value="{{ old('username') }}" required>
                 </div>
 
@@ -45,7 +45,7 @@
                     <label for="password" class="block text-gray-700 text-lg font-medium mb-1">Password <span
                             class="text-red-600">*</span></label>
                     <input type="password" id="password" name="password"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-secondary focus:outline-none"
                         placeholder="Masukkan password" required>
                 </div>
 

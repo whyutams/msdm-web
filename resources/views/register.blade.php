@@ -28,7 +28,7 @@
                                 Nama Lengkap <span class="text-red-600">*</span>
                             </label>
                             <input type="text" id="fullname" name="fullname"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none @error('fullname') border-red-600 @enderror"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-secondary focus:outline-none @error('fullname') border-red-600 @enderror"
                                 placeholder="Masukkan nama lengkap" value="{{ old('fullname') }}" required>
                         </div>
 
@@ -37,7 +37,7 @@
                                 Nama Panggilan <span class="text-red-600">*</span>
                             </label>
                             <input type="text" id="callname" name="callname"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none @error('callname') border-red-600 @enderror"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-secondary focus:outline-none @error('callname') border-red-600 @enderror"
                                 placeholder="Masukkan nama panggilan" value="{{ old(key: 'callname') }}" required>
                         </div>
 
@@ -48,13 +48,13 @@
                             <div class="flex flex-row space-x-6 @error('callname') border-red-600 rounded-lg @enderror">
                                 <label class="flex items-center space-x-3">
                                     <input type="radio" name="gender" value="pria" @if(old('gender') == 'pria') checked @endif
-                                        class="h-5 w-5 text-blue-600 accent-secondary focus:ring-blue-500 border-gray-300"
+                                        class="h-5 w-5 text-blue-600 accent-secondary focus:ring-secondary border-gray-300"
                                         required>
                                     <span class="text-gray-700 text-lg">Pria</span>
                                 </label>
                                 <label class="flex items-center space-x-3">
                                     <input type="radio" name="gender" value="wanita" @if(old('gender') == 'wanita') checked @endif
-                                        class="h-5 w-5 text-blue-600 accent-secondary focus:ring-blue-500 border-gray-300">
+                                        class="h-5 w-5 text-blue-600 accent-secondary focus:ring-secondary border-gray-300">
                                     <span class="text-gray-700 text-lg">Wanita</span>
                                 </label>
                             </div>
@@ -65,7 +65,7 @@
                                 Nomor HP <span class="text-red-600">*</span>
                             </label>
                             <input type="text" id="no_hp" name="no_hp"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none @error('no_hp') border-red-600 @enderror"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-secondary focus:outline-none @error('no_hp') border-red-600 @enderror"
                                 placeholder="Masukkan nomor HP" value="{{ old('no_hp') }}"  required>
                         </div>
 
@@ -74,7 +74,7 @@
                                 Email <span class="text-red-600"></span>
                             </label>
                             <input type="text" id="email" name="email"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none @error('email') border-red-600 @enderror"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-secondary focus:outline-none @error('email') border-red-600 @enderror"
                                 placeholder="Masukkan email" value="{{ old('email') }}">
                         </div>
 
@@ -84,7 +84,7 @@
                             </label>
 
                             <input type="date" id="birth_date" name="birth_date"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none @error('birth_date') border-red-600 @enderror"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-secondary focus:outline-none @error('birth_date') border-red-600 @enderror"
                                 value="{{ old('birth_date') }}" required>
                         </div>
                     </div>
@@ -96,32 +96,8 @@
                             </label>
 
                             <textarea rows="3" name="address" id="address"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none @error('address') border-red-600 @enderror"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-secondary focus:outline-none @error('address') border-red-600 @enderror"
                                 placeholder="Masukkan alamat" required>{{ old('address') }}</textarea>
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-700 font-medium text-lg mb-3">
-                                Tipe Diabetes <span class="text-red-600">*</span>
-                            </label>
-                            <div class="flex flex-col sm:flex-row sm:space-x-6 space-y-3 sm:space-y-0 @error('callname') rounded-lg border-red-600 @enderror">
-                                <label class="flex items-center space-x-3">
-                                    <input type="radio" name="diabetes_type" value="1" @if(old('diabetes_type') == '1') checked @endif
-                                        class="h-5 w-5 text-blue-600 accent-secondary focus:ring-blue-500 border-gray-300"
-                                        required>
-                                    <span class="text-gray-700 text-lg">Tipe 1</span>
-                                </label>
-                                <label class="flex items-center space-x-3">
-                                    <input type="radio" name="diabetes_type" value="2" @if(old('diabetes_type') == '2') checked @endif
-                                        class="h-5 w-5 text-blue-600 accent-secondary focus:ring-blue-500 border-gray-300">
-                                    <span class="text-gray-700 text-lg">Tipe 2</span>
-                                </label>
-                                <label class="flex items-center space-x-3">
-                                    <input type="radio" name="diabetes_type" value="gestasional" @if(old('diabetes_type') == 'gestasional') checked @endif
-                                        class="h-5 w-5 text-blue-600 accent-secondary focus:ring-blue-500 border-gray-300">
-                                    <span class="text-gray-700 text-lg">Gestasional</span>
-                                </label>
-                            </div>
                         </div>
 
                         <div>
@@ -129,7 +105,7 @@
                                 Username <span class="text-red-600">*</span>
                             </label>
                             <input type="text" id="username" name="username"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none @error('username') border-red-600 @enderror"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-secondary focus:outline-none @error('username') border-red-600 @enderror"
                                 placeholder="Masukkan username" value="{{ old('username') }}" required>
                         </div>
 
@@ -138,7 +114,7 @@
                                 Password <span class="text-red-600">*</span>
                             </label>
                             <input type="password" id="password" name="password"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none @error('password') border-red-600 @enderror"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-secondary focus:outline-none @error('password') border-red-600 @enderror"
                                 placeholder="Masukkan password" required>
                         </div>
 
@@ -147,7 +123,7 @@
                                 Konfirmasi Password <span class="text-red-600">*</span>
                             </label>
                             <input type="password" id="password_confirmation" name="password_confirmation"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none @error('password_confirmation') border-red-600 @enderror"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-secondary focus:outline-none @error('password_confirmation') border-red-600 @enderror"
                                 placeholder="Ulangi password" required>
                         </div>
                     </div>
