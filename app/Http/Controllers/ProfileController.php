@@ -22,6 +22,9 @@ class ProfileController extends Controller
         if (Auth::user()->role == User::ROLE_USER) {
             return view('user.update-profile');
         } else {
+            if (Auth::user()->role == User::ROLE_SUPERADMIN) {
+                return abort('404', 'NOT FOUND');
+            }
             return view('dashboard.admin.update-profile');
         }
     }
@@ -83,6 +86,10 @@ class ProfileController extends Controller
                 'username' => Auth::user()->username,
             ];
         } else {
+            if (Auth::user()->role == User::ROLE_SUPERADMIN) {
+                return abort('404', 'NOT FOUND');
+            }
+
             $request->validate([
                 'fullname' => 'required|string|max:100',
                 'callname' => 'nullable|string|max:10',
