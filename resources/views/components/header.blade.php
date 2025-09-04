@@ -18,12 +18,17 @@
             <nav class="hidden md:flex space-x-4">
                 <a href="/#"
                     class="text-gray-700 hover:text-primary text-lg px-4 py-2 rounded-lg hover:bg-blue-50 transition-all duration-200">Beranda</a>
+                @auth
+                    <a href="{{ url('/mytask') }}"
+                        class="text-gray-700 hover:text-primary text-lg px-4 py-2 rounded-lg hover:bg-blue-50 transition-all duration-200">Tugas</a>
+                @endauth
                 <a href="{{ route('cerita') }}"
                     class="text-gray-700 hover:text-primary text-lg px-4 py-2 rounded-lg hover:bg-blue-50 transition-all duration-200">Cerita</a>
-                <a href="{{ route('kelas-sebaya') }}"
-                    class="text-gray-700 hover:text-primary text-lg px-4 py-2 rounded-lg hover:bg-blue-50 transition-all duration-200">Kelas
-                    Sebaya</a>
                 @auth
+                    <a href="{{ route('kelas-sebaya') }}"
+                        class="text-gray-700 hover:text-primary text-lg px-4 py-2 rounded-lg hover:bg-blue-50 transition-all duration-200">Kelas
+                        Sebaya</a>
+                    <div class="mx-2"></div>
                     <!-- Profile Dropdown -->
                     <div class="relative" x-data="{ open: false }">
                         <!-- Trigger -->
@@ -51,7 +56,6 @@
                             class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg py-2 z-50">
                             <a href="{{ url('/profile') }}"
                                 class="block px-4 py-2 text-gray-700 hover:bg-blue-50 transition">Profil</a>
-                            <a href="{{ url('/mytask') }}" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 transition">Tugas</a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
@@ -82,12 +86,16 @@
             <div class="flex flex-col space-y-4">
                 <a href="/#"
                     class="text-gray-700 hover:text-primary text-lg px-4 py-3 rounded-lg hover:bg-blue-50 transition-all duration-200">Beranda</a>
+                @auth
+                    <a href="{{ url('/mytask') }}"
+                        class="text-gray-700 hover:text-primary text-lg px-4 py-3 rounded-lg hover:bg-blue-50 transition-all duration-200">Tugas</a>
+                @endauth
                 <a href="{{ route('cerita') }}"
                     class="text-gray-700 hover:text-primary text-lg px-4 py-3 rounded-lg hover:bg-blue-50 transition-all duration-200">Cerita</a>
-                <a href="{{ route('kelas-sebaya') }}"
-                    class="text-gray-700 hover:text-primary text-lg px-4 py-3 rounded-lg hover:bg-blue-50 transition-all duration-200">Kelas
-                    Sebaya</a>
                 @auth
+                    <a href="{{ route('kelas-sebaya') }}"
+                        class="text-gray-700 hover:text-primary text-lg px-4 py-3 rounded-lg hover:bg-blue-50 transition-all duration-200">Kelas
+                        Sebaya</a>
                     <!-- Profile Dropdown -->
                     <div class="relative" x-data="{ open: false }">
                         <!-- Trigger -->
@@ -115,7 +123,6 @@
                             class="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg py-2 z-50">
                             <a href="{{ url('/profile') }}"
                                 class="block px-4 py-2 text-gray-700 hover:bg-blue-50 transition">Profil</a>
-                            <a href="{{ url('/mytask') }}" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 transition">Tugas</a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
