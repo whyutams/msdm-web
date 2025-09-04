@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cerita;
+use App\Models\KontakSebaya;
 use App\Models\sc;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -18,14 +19,16 @@ class LandingController extends Controller
      */
     public function index()
     {
+        $users = User::latest()->get();
+        $kontak_sebayas = KontakSebaya::latest()->get();
         $ceritas = Cerita::with('user')->limit(2)->latest()->get();
 
-        if (User::ROLE_SUPERADMIN || User::ROLE_ADMIN) {
-            return view('index', compact('ceritas'));
+        if (Auth::check() && (Auth::user()->role == User::ROLE_SUPERADMIN || Auth::user()->role == User::ROLE_ADMIN)) {
+            return redirect('/dashboard');
         } else {
             return view('index', compact('ceritas'));
         }
-    } 
+    }
 
     public function login()
     {
@@ -41,7 +44,7 @@ class LandingController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(Auth::user()->role == User::ROLE_USER ? '/mytask' : '/')->with('success', 'Login berhasil, Selamat datang ' . Auth::user()->callname . '.'); 
+            return redirect()->intended(Auth::user()->role == User::ROLE_USER ? '/mytask' : '/dashboard')->with('success', 'Login berhasil, Selamat datang ' . (Auth::user()->callname ?? Auth::user()->fullname) . '!');
         }
 
         return back()->withErrors([
@@ -56,15 +59,14 @@ class LandingController extends Controller
 
     public function proses_register(Request $request)
     {
-        $credentials=$request->validate([
+        $credentials = $request->validate([
             'fullname' => 'required|string|max:100',
             'callname' => 'required|string|max:10',
             'email' => 'nullable|email|unique:users,email',
             'no_hp' => 'required|numeric|digits_between:6,20|unique:users,no_hp',
             'address' => 'nullable|string',
-            'gender' => 'string|in:pria,wanita',
+            'gender' => 'string|in:' . implode(',', User::GENDER),
             'birth_date' => 'required|date',
-            'diabetes_type' => 'string|in:1,2,gestasional',
             'username' => 'required|string|min:6|max:50|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -77,15 +79,14 @@ class LandingController extends Controller
             'address' => $request->address,
             'gender' => $request->gender,
             'birth_date' => $request->birth_date,
-            'diabetes_type' => $request->diabetes_type,
             'username' => $request->username,
             'password' => Hash::make($request->password),
         ]);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/mytask')->with('success', 'Registrasi berhasil, Selamat datang ' . $request->callname . '.'); 
-        } 
+            return redirect()->intended('/mytask')->with('success', 'Registrasi berhasil, Selamat datang ' . $request->callname . '!');
+        }
     }
 
     public function cerita()
@@ -100,7 +101,9 @@ class LandingController extends Controller
 
     public function kelas_sebaya()
     {
-        return view("kelas-sebaya");
+        $kontak_sebayas = KontakSebaya::all();
+
+        return view("kelas-sebaya", compact('kontak_sebayas'));
     }
 
     public function logout(Request $request)
@@ -109,7 +112,6 @@ class LandingController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/login')->with('success', 'Berhasil logout.');
-        ;
     }
 
 }

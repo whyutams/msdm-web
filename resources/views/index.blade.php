@@ -448,12 +448,12 @@
         </div>
     </section>
 
-    <div class="mx-8">
-        <div class="w-full border-t border-slate-300 max-w-7xl mx-auto py-12"></div>
-    </div>
 
     <!-- Cerita Section -->
     @if ($ceritas->count() > 0)
+        <div class="mx-8">
+            <div class="w-full border-t border-slate-300 max-w-7xl mx-auto py-12"></div>
+        </div>
         <section id="stories" class="pb-24 bg-white">
             <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
                 <div class="text-center mb-20">
