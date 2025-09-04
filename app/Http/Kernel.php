@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role' => \App\Http\Middleware\RoleMiddleware::class,
         'check.biodata' => \App\Http\Middleware\CheckBiodata::class,
+        'check.suspended' => \App\Http\Middleware\CheckSuspended::class,
 
     ];
 }
