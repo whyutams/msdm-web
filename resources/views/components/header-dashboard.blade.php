@@ -1,10 +1,10 @@
 <header class="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
     <div class="flex items-center justify-between">
         <div class="flex items-center">
-            <button id="menuToggle" class="lg:hidden text-gray-600 hover:text-gray-900 mr-4">
+            <button id="menuToggle" class="lg:hidden text-primary hover:text-blue-800 mr-4">
                 <i class="fas fa-bars text-xl"></i>
             </button>
-            <h2 class="text-xl font-semibold text-gray-800">@yield('title')</h2>
+            <h2 class="text-xl font-semibold text-primary">@yield('title')</h2>
         </div>
 
         <div class="relative" x-data="{ open: false }">
