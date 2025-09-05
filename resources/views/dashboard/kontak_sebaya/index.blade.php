@@ -41,8 +41,7 @@
                                 <th class="px-4 py-3 border">Updated By</th>
                                 <th class="px-4 py-3 border">Created At</th>
                                 <th class="px-4 py-3 border">Created By</th>
-                                @if(Auth::user()->role == \App\Models\User::ROLE_ADMIN)
-                                <th class="px-4 py-3 border w-[20%]">Actions</th> @endif
+                                <th class="px-4 py-3 border w-[20%]">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,25 +59,23 @@
                                         {{  Carbon\Carbon::parse($kontak_sebaya->created_at)->translatedFormat('d M Y') }}
                                     </td>
                                     <td class="px-4 py-3 border">{{ $kontak_sebaya->creator->fullname }}</td>
-                                    @if (Auth::user()->role == App\Models\User::ROLE_ADMIN)
-                                        <td class="px-4 py-3 border lg:space-x-1">
-                                            <a href="{{ route('dashboard.kontak_sebaya.edit', $kontak_sebaya->id) }}"
-                                                class="inline-flex items-center px-3 py-1 rounded bg-yellow-400 text-black hover:bg-yellow-500 text-sm">
-                                                <i class="fas fa-edit mr-1"></i> Edit
-                                            </a>
-                                            <div class="lg:hidden my-1"></div>
-                                            <form action="{{ route('dashboard.kontak_sebaya.destroy', $kontak_sebaya->id) }}"
-                                                method="POST" class="inline"
-                                                onsubmit="return confirm('Yakin ingin menghapus data?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button
-                                                    class="inline-flex items-center px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600 text-sm">
-                                                    <i class="fas fa-trash mr-1"></i> Delete
-                                                </button>
-                                            </form>
-                                        </td>
-                                    @endif
+                                    <td class="px-4 py-3 border lg:space-x-1">
+                                        <a href="{{ route('dashboard.kontak_sebaya.edit', $kontak_sebaya->id) }}"
+                                            class="inline-flex items-center px-3 py-1 rounded bg-yellow-400 text-black hover:bg-yellow-500 text-sm">
+                                            <i class="fas fa-edit mr-1"></i> Edit
+                                        </a>
+                                        <div class="lg:hidden my-1"></div>
+                                        <form action="{{ route('dashboard.kontak_sebaya.destroy', $kontak_sebaya->id) }}"
+                                            method="POST" class="inline"
+                                            onsubmit="return confirm('Yakin ingin menghapus data?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button
+                                                class="inline-flex items-center px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600 text-sm">
+                                                <i class="fas fa-trash mr-1"></i> Delete
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
@@ -95,12 +92,10 @@
                     <div id="custom-paginate"></div>
                     <div class="flex items-center gap-2" id="custom-buttons">
                         <div id="btn_excel_wrapper"></div>
-                        @if (Auth::user()->role == App\Models\User::ROLE_ADMIN)
-                            <a href="{{ route('dashboard.kontak_sebaya.create') }}"
-                                class="inline-flex items-center px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 text-sm">
-                                <i class="fas fa-plus mr-1"></i> Add Kontak Sebaya
-                            </a>
-                        @endif
+                        <a href="{{ route('dashboard.kontak_sebaya.create') }}"
+                            class="inline-flex items-center px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 text-sm">
+                            <i class="fas fa-plus mr-1"></i> Add Kontak Sebaya
+                        </a>
                     </div>
                 </div>
             </div>

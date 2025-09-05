@@ -59,8 +59,7 @@ Route::middleware(['auth', 'check.suspended'])->group(function () {
 
     Route::prefix('/dashboard')->name('dashboard.')->middleware(['role:' . User::ROLE_SUPERADMIN . ',' . User::ROLE_ADMIN])->group(function () {
         Route::get('', [DashboardController::class, 'index'])->name('index');
-        Route::resource('/kontak_sebaya', KontakSebayaController::class)->only(['create', 'update', 'store', 'edit', 'destroy'])->names('kontak_sebaya')->middleware('role:' . User::ROLE_ADMIN);
-        Route::resource('/kontak_sebaya', KontakSebayaController::class)->only(['index'])->names('kontak_sebaya')->middleware('role:' . User::ROLE_SUPERADMIN . ',' . User::ROLE_ADMIN);
+        Route::resource('/kontak_sebaya', KontakSebayaController::class)->names('kontak_sebaya');
         Route::post('/users/suspend/{user}', [UserController::class, 'toggleSuspend'])->name('users.suspend')->middleware('role:' . User::ROLE_SUPERADMIN);
         Route::resource('/users', UserController::class)->only(['create', 'update', 'store', 'edit', 'destroy'])->names('users')->middleware(['role:' . User::ROLE_SUPERADMIN]);
         Route::resource('/users', UserController::class)->only(['index', 'show'])->names('users')->middleware(['role:' . User::ROLE_SUPERADMIN . ',' . User::ROLE_ADMIN]);
