@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Auth;
 use Closure;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class CheckBiodata
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
+        if (Auth::check() && Auth::user()->role==User::ROLE_USER) {
             $user = Auth::user();
 
             $requiredFields = [
