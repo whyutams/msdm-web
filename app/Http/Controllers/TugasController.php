@@ -13,7 +13,7 @@ class TugasController extends Controller
      */
     public function index()
     {
-        $tugass = Tugas::with(['creator', 'updater'])->get();
+        $tugass = Tugas::with(['creator', 'updater'])->latest()->get();
 
         return view('dashboard.tugas.index', compact('tugass'));
     }
@@ -62,7 +62,7 @@ class TugasController extends Controller
      */
     public function edit(Tugas $tugas)
     {
-        //
+        return view('dashboard.tugas.edit', compact('tugas'));
     }
 
     /**
@@ -70,7 +70,16 @@ class TugasController extends Controller
      */
     public function update(Request $request, Tugas $tugas)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+        ]);
+
+        $validated['updated_by'] = Auth::id();
+
+        $tugas->update($validated);
+
+        return redirect()->route('dashboard.tugas.show', $tugas->id)->with('success', 'Tugas berhasil diperbarui.');
     }
 
     /**
