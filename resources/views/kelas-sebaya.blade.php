@@ -82,9 +82,32 @@
                     Kelas Sebaya
                 </h2>
                 <p class="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut minima laboriosam quisquam porro nisi.
+                    Dapatkan dukungan, atau hubungi teman sebaya yang siap membantu Anda!
                 </p>
             </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @forelse($kontak_sebayas as $index => $kontak_sebaya)
+                    <div
+                        class="bg-gray-50 border border-slate-300 rounded-2xl shadow hover:shadow-lg transition-all duration-300 p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">{{ $kontak_sebaya->name }}</h3>
+                            <p class="text-gray-600 mb-4">{{ $kontak_sebaya->description }}</p>
+                            <p class="text-sm text-gray-500 mb-6">Nomor: <span
+                                    class="font-medium">{{ $kontak_sebaya->number }}</span></p>
+                        </div>
+                        <a href="https://wa.me/{{ $kontak_sebaya->number }}" target="_blank"
+                            class="bg-green-500 hover:bg-green-600 text-white text-center font-semibold py-2 px-4 rounded-lg transition">
+                            <i class="fas fa-brands font-normal text-xl fa-whatsapp mr-1"></i> Hubungi via WhatsApp
+                        </a>
+                    </div>
+                @empty
+                    </div>
+                    <div class="flex justify-center">
+                        <p class="text-gray-600 text-lg text-center">Belum ada data.</p>
+                    </div>
+                @endforelse
+
         </div>
     </section>
 
