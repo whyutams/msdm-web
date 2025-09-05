@@ -25,5 +25,10 @@
             <i class="fas fa-book-open mr-3"></i>
             Cerita
         </a>
+        <a href="{{ url('/dashboard/tugas') }}"
+            class="flex items-center px-6 py-3 text-white hover:bg-blue-600 transition-colors duration-200 {{ Request::is('dashboard/tugas*') ? 'bg-blue-600' : '' }}">
+            <i class="fas fa-clipboard-list mr-3"></i>
+            Penugasan
+        </a>
     </nav>
 </div>

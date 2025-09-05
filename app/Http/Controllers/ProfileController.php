@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tugas;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -127,7 +128,9 @@ class ProfileController extends Controller
 
     public function task()
     {
-        return view('user.task');
+        $tasks = Tugas::with('creator','updater')->latest()->get();
+
+        return view('user.task', compact('tasks'));
     }
 
     public function biodata_edit()

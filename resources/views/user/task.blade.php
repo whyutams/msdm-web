@@ -80,142 +80,59 @@
             {{-- Reminder END --}}
 
             {{-- Tasks --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
+            <h1 class="text-2xl lg:text-3xl font-semibold text-gray-800 mt-12">Tugas Anda</h1>
+            @if ($tasks->count() > 0)
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-8">
+                    @foreach ($tasks as $index => $task)
+                        <div
+                            class="bg-gray-50 rounded-3xl p-10 shadow hover:shadow-lg transition-all duration-300 border border-gray-200 h-full">
 
-                <div
-                    class="bg-gray-50 rounded-3xl p-10 shadow hover:shadow-lg transition-all duration-300 border border-gray-200 h-full">
+                            <h3 class="font-bold text-primary text-2xl mb-4">Minggu ke-{{ $task->minggu }}</h3>
+                            <h3 class="font-semibold text-gray-800 text-xl mb-4">{{$task->title}}</h3>
+                            <p class="text-gray-700 leading-relaxed mb-8 text-lg line-clamp-3 text-justify">
+                                {{ $task->description }}
+                            </p>
 
-                    <h3 class="font-bold text-primary text-2xl mb-4">Minggu x</h3>
-                    <h3 class="font-semibold text-gray-800 text-xl mb-4">Lorem, ipsum.</h3>
-                    <p class="text-gray-700 leading-relaxed mb-8 text-lg line-clamp-3 text-justify">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi tempore repudiandae aut totam qui
-                        fuga aliquam eos ducimus in possimus, repellendus sint voluptatem doloribus adipisci, distinctio
-                        sequi ipsa deserunt quasi quia, maxime voluptas dolorem obcaecati? Perspiciatis repellendus
-                        architecto aperiam neque nulla! Mollitia sed aut veritatis tempore error unde odio enim.
-                    </p>
+                            <div class="max-w-md mx-auto mt-4">
+                                <button
+                                    class="toggleBtn w-full flex items-center justify-between px-4 py-2 text-primary font-medium rounded-lg border border-slate-400 hover:border-primary hover:text-blue-800 transition">
+                                    <span>Lihat Tugas (Belum Selesai)</span>
+                                    <svg class="arrowIcon w-5 h-5 transform transition-transform duration-300" fill="none"
+                                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
 
-                    <div class="max-w-md mx-auto mt-4">
-                        <button
-                            class="toggleBtn w-full flex items-center justify-between px-4 py-2 text-primary font-medium rounded-lg border border-slate-400 hover:border-primary hover:text-blue-800 transition">
-                            <span>Lihat Tugas (Belum Selesai)</span>
-                            <svg class="arrowIcon w-5 h-5 transform transition-transform duration-300" fill="none"
-                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
-
-                        <ul class="materiList mt-3 hidden">
-                            <table class="w-full text-left">
-                                <tr class="border-b border-gray-200 text-green-600 space-x-2">
-                                    <td class="p-2">Materi 1</td>
-                                    <td class="p-2">✔️</td>
-                                    <td
-                                        class="p-2 text-secondary font-medium hover:underline whitespace-nowrap cursor-pointer hidden">
-                                        Selesaikan
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="p-2">Materi 2</td>
-                                    <td class="p-2">❌</td>
-                                    <td
-                                        class="p-2 text-secondary font-medium hover:underline whitespace-nowrap cursor-pointer">
-                                        Selesaikan
-                                    </td>
-                                </tr>
-                            </table>
-                        </ul>
-                    </div>
+                                <ul class="materiList mt-3 hidden">
+                                    <table class="w-full text-left">
+                                        <tr class="border-b border-gray-200 text-green-600 space-x-2">
+                                            <td class="p-2">Materi 1</td>
+                                            <td class="p-2">✔️</td>
+                                            <td
+                                                class="p-2 text-secondary font-medium hover:underline whitespace-nowrap cursor-pointer hidden">
+                                                Selesaikan
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2">Materi 2</td>
+                                            <td class="p-2">❌</td>
+                                            <td
+                                                class="p-2 text-secondary font-medium hover:underline whitespace-nowrap cursor-pointer">
+                                                Selesaikan
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </ul>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                <div
-                    class="bg-gray-50 rounded-3xl p-10 shadow hover:shadow-lg transition-all duration-300 border border-gray-200 h-full">
-
-                    <h3 class="font-bold text-primary text-2xl mb-4">Minggu x</h3>
-                    <h3 class="font-semibold text-gray-800 text-xl mb-4">Lorem, ipsum.</h3>
-                    <p class="text-gray-700 leading-relaxed mb-8 text-lg line-clamp-3 text-justify">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi tempore repudiandae aut totam qui
-                        fuga aliquam eos ducimus in possimus, repellendus sint voluptatem doloribus adipisci, distinctio
-                        sequi ipsa deserunt quasi quia, maxime voluptas dolorem obcaecati? Perspiciatis repellendus
-                        architecto aperiam neque nulla! Mollitia sed aut veritatis tempore error unde odio enim.
-                    </p>
-
-                    <div class="max-w-md mx-auto mt-4">
-                        <button
-                            class="toggleBtn w-full flex items-center justify-between px-4 py-2 text-primary font-medium rounded-lg border border-slate-400 hover:border-primary hover:text-blue-800 transition">
-                            <span>Lihat Tugas (Belum Selesai)</span>
-                            <svg class="arrowIcon w-5 h-5 transform transition-transform duration-300" fill="none"
-                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
-
-                        <ul class="materiList mt-3 hidden">
-                            <table class="w-full text-left">
-                                <tr class="border-b border-gray-200 text-green-600 space-x-2">
-                                    <td class="p-2">Materi 1</td>
-                                    <td class="p-2">✔️</td>
-                                    <td
-                                        class="p-2 text-secondary font-medium hover:underline whitespace-nowrap cursor-pointer hidden">
-                                        Selesaikan
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="p-2">Materi 2</td>
-                                    <td class="p-2">❌</td>
-                                    <td
-                                        class="p-2 text-secondary font-medium hover:underline whitespace-nowrap cursor-pointer">
-                                        Selesaikan
-                                    </td>
-                                </tr>
-                            </table>
-                        </ul>
-                    </div>
+            @else
+                <div class="flex justify-center mt-12">
+                    <p class="text-gray-600 text-lg text-center">Tugas belum ditambahkan.</p>
                 </div>
-                <div
-                    class="bg-gray-50 rounded-3xl p-10 shadow hover:shadow-lg transition-all duration-300 border border-gray-200 h-full">
+            @endif
 
-                    <h3 class="font-bold text-primary text-2xl mb-4">Minggu x</h3>
-                    <h3 class="font-semibold text-gray-800 text-xl mb-4">Lorem, ipsum.</h3>
-                    <p class="text-gray-700 leading-relaxed mb-8 text-lg line-clamp-3 text-justify">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi tempore repudiandae aut totam qui
-                        fuga aliquam eos ducimus in possimus, repellendus sint voluptatem doloribus adipisci, distinctio
-                        sequi ipsa deserunt quasi quia, maxime voluptas dolorem obcaecati? Perspiciatis repellendus
-                        architecto aperiam neque nulla! Mollitia sed aut veritatis tempore error unde odio enim.
-                    </p>
-
-                    <div class="max-w-md mx-auto mt-4">
-                        <button
-                            class="toggleBtn w-full flex items-center justify-between px-4 py-2 text-primary font-medium rounded-lg border border-slate-400 hover:border-primary hover:text-blue-800 transition">
-                            <span>Lihat Tugas (Belum Selesai)</span>
-                            <svg class="arrowIcon w-5 h-5 transform transition-transform duration-300" fill="none"
-                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
-
-                        <ul class="materiList mt-3 hidden">
-                            <table class="w-full text-left">
-                                <tr class="border-b border-gray-200 text-green-600 space-x-2">
-                                    <td class="p-2">Materi 1</td>
-                                    <td class="p-2">✔️</td>
-                                    <td
-                                        class="p-2 text-secondary font-medium hover:underline whitespace-nowrap cursor-pointer hidden">
-                                        Selesaikan
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="p-2">Materi 2</td>
-                                    <td class="p-2">❌</td>
-                                    <td
-                                        class="p-2 text-secondary font-medium hover:underline whitespace-nowrap cursor-pointer">
-                                        Selesaikan
-                                    </td>
-                                </tr>
-                            </table>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
             <script>
                 $(document).on("click", ".toggleBtn", function () {
                     const card = $(this).closest(".max-w-md");

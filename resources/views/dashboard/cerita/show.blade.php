@@ -75,7 +75,7 @@
 
                 <div class="mt-12 flex lg:justify-between justify-center flex-wrap gap-4">
                     <a href="{{ route('dashboard.cerita.index') }}"
-                        class="bg-slate-500 text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-slate-600 hover:shadow-lg transition-all duration-200 w-60 text-center">
+                        class="bg-slate-500 text-white px-4 py-2 rounded hover:bg-slate-600 hover:shadow-lg transition-all duration-200 w-60 text-center">
                         Kembali
                     </a>
                 </div>
