@@ -44,8 +44,8 @@
                                 @if (Auth::user()->role == App\Models\User::ROLE_SUPERADMIN)
                                     <th class="px-4 py-3 border">Role</th>
                                 @endif
-                                <th class="px-4 py-3 border">Created By</th>
-                                <th class="px-4 py-3 border">Updated By</th>
+                                <th class="px-4 py-3 border">Created At</th>
+                                <th class="px-4 py-3 border">Updated At</th>
                                 <th class="px-4 py-3 border w-[20%]">Actions</th>
                             </tr>
                         </thead>

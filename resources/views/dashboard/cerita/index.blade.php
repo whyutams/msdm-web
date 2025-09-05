@@ -37,8 +37,8 @@
                                 <th class="px-4 py-3 border">Username</th>
                                 <th class="px-4 py-3 border">Nama Lengkap</th>
                                 <th class="px-4 py-3 border">Cerita</th>
-                                <th class="px-4 py-3 border">Created By</th>
-                                <th class="px-4 py-3 border">Updated By</th>
+                                <th class="px-4 py-3 border">Created At</th>
+                                <th class="px-4 py-3 border">Updated At</th>
                                 <th class="px-4 py-3 border w-[20%]">Actions</th>
                             </tr>
                         </thead>

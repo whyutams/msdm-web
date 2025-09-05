@@ -54,11 +54,11 @@
                                     <td class="px-4 py-3 border">
                                         {{  Carbon\Carbon::parse($kontak_sebaya->updated_at)->translatedFormat('d M Y') }}
                                     </td>
-                                    <td class="px-4 py-3 border">{{ $kontak_sebaya->updater->fullname }}</td>
+                                    <td class="px-4 py-3 border">{{ $kontak_sebaya->updater?->fullname ?? '-' }}</td>
                                     <td class="px-4 py-3 border">
                                         {{  Carbon\Carbon::parse($kontak_sebaya->created_at)->translatedFormat('d M Y') }}
                                     </td>
-                                    <td class="px-4 py-3 border">{{ $kontak_sebaya->creator->fullname }}</td>
+                                    <td class="px-4 py-3 border">{{ $kontak_sebaya->creator?->fullname ?? '-' }}</td>
                                     <td class="px-4 py-3 border lg:space-x-1">
                                         <a href="{{ route('dashboard.kontak_sebaya.edit', $kontak_sebaya->id) }}"
                                             class="inline-flex items-center px-3 py-1 rounded bg-yellow-400 text-black hover:bg-yellow-500 text-sm">
