@@ -21,7 +21,7 @@ class LandingController extends Controller
     {
         $users = User::latest()->get();
         $kontak_sebayas = KontakSebaya::latest()->get();
-        $ceritas = Cerita::with('user')->limit(2)->latest()->get();
+        $ceritas = Cerita::with('user')->where('suspended', '!=', '1')->limit(2)->latest()->get();
 
         if (Auth::check() && (Auth::user()->role == User::ROLE_SUPERADMIN || Auth::user()->role == User::ROLE_ADMIN)) {
             return redirect('/dashboard');

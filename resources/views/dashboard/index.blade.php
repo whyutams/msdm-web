@@ -11,19 +11,21 @@
         </div>
     @endif
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-gray-500 text-sm font-medium">Total Admins</p>
-                    <p class="text-2xl font-bold text-gray-700 mt-1 counter"
-                        data-target="{{ $users->where('role', App\Models\User::ROLE_ADMIN)->count() }}">0</p>
-                </div>
-                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                    <i class="fas fa-users text-secondary text-lg"></i>
+    <div class="grid grid-cols-1 @if (Auth::user()->role == App\Models\User::ROLE_SUPERADMIN) md:grid-cols-2 lg:grid-cols-4 @else  md:grid-cols-3 @endif gap-6 mb-8">
+        @if (Auth::user()->role == App\Models\User::ROLE_SUPERADMIN)
+            <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm font-medium">Total Admins</p>
+                        <p class="text-2xl font-bold text-gray-700 mt-1 counter"
+                            data-target="{{ $users->where('role', App\Models\User::ROLE_ADMIN)->count() }}">0</p>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-users text-secondary text-lg"></i>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
 
         <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
             <div class="flex items-center justify-between">
