@@ -82,13 +82,7 @@
                     <div id="custom-info" class="text-gray-600"></div>
                     <div id="custom-paginate"></div>
                     <div class="flex items-center gap-2" id="custom-buttons">
-                        <div id="btn_excel_wrapper"></div>
-                        @if (Auth::user()->role == App\Models\User::ROLE_SUPERADMIN)
-                            <a href="{{ route('dashboard.users.create') }}"
-                                class="inline-flex items-center px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 text-sm">
-                                <i class="fas fa-plus mr-1"></i> Add Admin
-                            </a>
-                        @endif
+                        <div id="btn_excel_wrapper"></div> 
                     </div>
                 </div>
             </div>

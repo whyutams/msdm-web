@@ -4,7 +4,7 @@
 
 @section('content')
     @if(session('success'))
-        <div class="mt-6 mx-auto" >
+        <div class="mt-6 mx-auto">
             <div class="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
                 {{ session('success') }}
             </div>
@@ -41,7 +41,8 @@
                                 <th class="px-4 py-3 border">Updated By</th>
                                 <th class="px-4 py-3 border">Created At</th>
                                 <th class="px-4 py-3 border">Created By</th>
-                                <th class="px-4 py-3 border @if(Auth::user()->role == \App\Models\User::ROLE_ADMIN) w-[20%] @endif">Actions</th>
+                                @if(Auth::user()->role == \App\Models\User::ROLE_ADMIN)
+                                <th class="px-4 py-3 border w-[20%]">Actions</th> @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -59,8 +60,8 @@
                                         {{  Carbon\Carbon::parse($kontak_sebaya->created_at)->translatedFormat('d M Y') }}
                                     </td>
                                     <td class="px-4 py-3 border">{{ $kontak_sebaya->creator->fullname }}</td>
-                                    <td class="px-4 py-3 border lg:space-x-1">
-                                        @if (Auth::user()->role == App\Models\User::ROLE_ADMIN)
+                                    @if (Auth::user()->role == App\Models\User::ROLE_ADMIN)
+                                        <td class="px-4 py-3 border lg:space-x-1">
                                             <a href="{{ route('dashboard.kontak_sebaya.edit', $kontak_sebaya->id) }}"
                                                 class="inline-flex items-center px-3 py-1 rounded bg-yellow-400 text-black hover:bg-yellow-500 text-sm">
                                                 <i class="fas fa-edit mr-1"></i> Edit
@@ -76,8 +77,8 @@
                                                     <i class="fas fa-trash mr-1"></i> Delete
                                                 </button>
                                             </form>
-                                        @endif
-                                    </td>
+                                        </td>
+                                    @endif
                                 </tr>
                             @empty
                                 <tr>
