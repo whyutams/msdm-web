@@ -66,5 +66,7 @@ Route::middleware(['auth', 'check.suspended'])->group(function () {
         Route::post('/cerita/suspend/{cerita}', [CeritaController::class, 'toggleSuspend'])->name('cerita.suspend');
         Route::get('/cerita', [CeritaController::class, 'd_index'])->name('cerita.index');
         Route::get('/cerita/{cerita}', [CeritaController::class, 'd_show'])->name('cerita.show');
+        Route::resource('/tugas', TugasController::class)->parameters(['tugas' => 'tugas'])->only(['create', 'update', 'store', 'edit', 'destroy'])->names('tugas')->middleware(['role:' . User::ROLE_ADMIN]);
+        Route::resource('/tugas', TugasController::class)->parameters(['tugas' => 'tugas'])->only(['index', 'show'])->names('tugas')->middleware(['role:' . User::ROLE_SUPERADMIN . ',' . User::ROLE_ADMIN]);
     });
 });
