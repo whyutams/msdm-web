@@ -139,9 +139,10 @@
                             </div>
                         </div>
 
-                        <p class="text-gray-700 leading-relaxed mb-8 text-lg line-clamp-2 text-justify">
+                        <p class="text-gray-700 leading-relaxed mb-8 text-lg line-clamp-2 text-justify break-words">
                             {{ strip_tags($cerita->cerita) }}
-                        </p>
+                        </p> 
+
                         <div class="flex justify-between">
                             <div>
                                 <a href="{{url('/cerita/' . $cerita->id)}}"

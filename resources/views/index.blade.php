@@ -487,7 +487,7 @@
                                     <p class="text-base text-gray-600">Tipe {{ $cerita->user->diabetes_type }}</p>
                                 </div>
                             </div>
-                            <p class="text-gray-700 leading-relaxed mb-8 text-lg line-clamp-2 text-justify">
+                            <p class="text-gray-700 leading-relaxed mb-8 text-lg line-clamp-2 text-justify break-words">
                                 {{ strip_tags($cerita->cerita) }}
                             </p>
                             <a href="{{url('/cerita/' . $cerita->id)}}"
