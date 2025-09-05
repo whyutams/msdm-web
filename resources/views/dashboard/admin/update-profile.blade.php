@@ -200,7 +200,7 @@
                         </div>
 
                         <div class="flex justify-end space-x-2">
-                            <a href="{{ url('dashboard/users') }}"
+                            <a href="{{ url('dashboard') }}"
                                 class="inline-flex items-center px-4 py-2 rounded bg-gray-500 text-white hover:bg-gray-600">
                                 Back
                             </a>
