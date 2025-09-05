@@ -20,7 +20,7 @@
             <i class="fas fa-user-friends mr-3"></i>
             Kontak Sebaya
         </a>
-        <a href="#"
+        <a href="{{ url('/dashboard/cerita') }}"
             class="nav-link flex items-center px-6 py-3 text-white hover:bg-blue-600 transition-colors duration-200">
             <i class="fas fa-book-open mr-3"></i>
             Cerita

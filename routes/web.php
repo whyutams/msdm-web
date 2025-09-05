@@ -48,12 +48,12 @@ Route::middleware(['auth', 'check.suspended'])->group(function () {
     Route::get('/biodata/edit', [ProfileController::class, 'biodata_edit'])->name('biodata.edit');
     Route::post('/biodata/update', [ProfileController::class, 'biodata_update'])->name('biodata.update');
 
-    Route::middleware(['role:' . User::ROLE_USER,'check.biodata'])->group(function () {
+    Route::middleware(['role:' . User::ROLE_USER, 'check.biodata'])->group(function () {
         Route::get('/mytask', [ProfileController::class, 'task'])->name('task');
         Route::get('/kelas-sebaya', [LandingController::class, 'kelas_sebaya'])->name('kelas-sebaya');
         Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
     });
-    
+
     Route::get('/profile/update', [ProfileController::class, 'update_profile'])->name('profile.form');
     Route::post('/profile/update', [ProfileController::class, 'proses_update_profile'])->name('profile.update');
 
@@ -64,5 +64,7 @@ Route::middleware(['auth', 'check.suspended'])->group(function () {
         Route::post('/users/suspend/{user}', [UserController::class, 'toggleSuspend'])->name('users.suspend')->middleware('role:' . User::ROLE_SUPERADMIN);
         Route::resource('/users', UserController::class)->only(['create', 'update', 'store', 'edit', 'destroy'])->names('users')->middleware(['role:' . User::ROLE_SUPERADMIN]);
         Route::resource('/users', UserController::class)->only(['index', 'show'])->names('users')->middleware(['role:' . User::ROLE_SUPERADMIN . ',' . User::ROLE_ADMIN]);
+        Route::get('/cerita', [CeritaController::class, 'd_index'])->name('cerita.index');
+        Route::get('/cerita/{cerita}', [CeritaController::class, 'd_show'])->name('cerita.show');
     });
 });

@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Add Admin')
+@section('title', 'Detail')
 
 @section('content')
     @if(session('success'))
@@ -13,6 +13,28 @@
 
     <section class="">
         <div class="bg-white shadow rounded-lg py-6">
+            <div class="px-5 pb-5">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
+                    <div>
+                        <h1 class="text-2xl font-semibold text-gray-800">Detail</h1>
+                    </div>
+                    <div>
+                        <nav class="flex" aria-label="Breadcrumb">
+                            <ol class="inline-flex items-center space-x-1 sm:space-x-3 text-sm text-gray-600">
+                                <li>
+                                    <a href="{{ url('dashboard') }}" class="hover:text-blue-600">Dashboard</a>
+                                </li>
+                                <li class="before:content-['/'] before:mr-2 hover:text-blue-600">
+                                    <a href="{{ url('dashboard/users') }}" class="hover:text-blue-600">
+                                        Users
+                                    </a>
+                                </li>
+                                <li class="before:content-['/'] before:mr-2 text-gray-400">Detail</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
             <div class="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
                 @if(session('success'))
                     <div class="mb-10 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">

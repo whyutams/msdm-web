@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cerita;
+use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,10 @@ class CeritaController extends Controller
     public function index()
     {
         $ceritas = Cerita::with('user')->latest()->get();
+
+        if (Auth::check() && Auth::user()->role != User::ROLE_USER) {
+            return abort('404', 'NOT FOUND');
+        }
 
         return view("cerita.index", compact('ceritas'));
     }
@@ -48,6 +53,10 @@ class CeritaController extends Controller
      */
     public function show(Cerita $cerita)
     {
+        if (Auth::check() && Auth::user()->role != User::ROLE_USER) {
+            return abort('404', 'Not Found');
+        }
+
         return view("cerita.show", compact('cerita'));
     }
 
@@ -95,5 +104,17 @@ class CeritaController extends Controller
         $cerita->delete();
 
         return redirect()->route('cerita')->with('success', 'Cerita berhasil dihapus.');
+    }
+
+    // DASHBOARD
+    public function d_index()
+    {
+        $ceritas = Cerita::with('user')->latest()->get();
+
+        return view('dashboard.cerita.index', compact('ceritas'));
+    }
+    public function d_show(Cerita $cerita)
+    {
+        return view('dashboard.cerita.show', compact('cerita'));
     }
 }
