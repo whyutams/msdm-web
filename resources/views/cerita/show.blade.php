@@ -107,9 +107,9 @@
             <p class="text-primary"><i class="fas fa-calendar mr-1 mb-4"></i>
                 {{ Carbon::parse($cerita->created_at)->translatedFormat('d M Y') }}</p>
 
-            <p class="text-gray-700 leading-relaxed mb-8 text-lg text-justify">
-                {{ strip_tags($cerita->cerita) }}
-            </p>
+                <p class="text-gray-700 leading-relaxed mb-8 text-lg text-justify break-words whitespace-pre-line">
+                    {{ strip_tags($cerita->cerita) }}
+                </p>
 
             <div class="mt-12 flex lg:justify-between justify-center flex-wrap gap-4">
                 <a href="{{ route('cerita') }}"
