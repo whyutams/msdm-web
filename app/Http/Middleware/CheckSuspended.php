@@ -20,7 +20,7 @@ class CheckSuspended
         if (Auth::check() && Auth::user()->suspended && Auth::user()->role != User::ROLE_SUPERADMIN) {
             Auth::logout();
             return redirect()->route('login')->withErrors([
-                'username' => 'Maaf, akun Anda dinonaktifkan!',
+                'username' => 'Maaf, akun Anda ditangguhkan.',
             ]);
         }
 
