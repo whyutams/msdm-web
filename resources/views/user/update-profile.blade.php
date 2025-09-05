@@ -425,7 +425,7 @@
                     <div class="space-y-6">
                         <div>
                             <label for="password" class="block text-gray-700 font-medium text-lg mb-2">
-                                Password
+                                Password Baru
                             </label>
                             <input type="password" id="password" name="password"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-secondary focus:outline-none @error('password') border-red-600 @enderror"

@@ -139,8 +139,9 @@
 
                         <div class="flex flex-col">
                             <label for="username" class="mb-2 font-medium">Username </label>
-                            <input type="text" name="username" id="username" class="py-2 px-4 border rounded-lg cursor-not-allowed"
-                                value="{{Auth::user()->username}}" disabled readonly>
+                            <input type="text" name="username" id="username"
+                                class="py-2 px-4 border rounded-lg cursor-not-allowed" value="{{Auth::user()->username}}"
+                                disabled readonly>
                         </div>
 
                         <div class="flex flex-col">
@@ -166,7 +167,7 @@
                         </div>
 
                         <div class="flex flex-col">
-                            <label for="password" class="mb-2 font-medium">Password <span
+                            <label for="password" class="mb-2 font-medium">Password Baru<span
                                     class="text-red-500 text-lg"></span></label>
                             <input type="password" name="password" id="password"
                                 class="py-2 px-4 border rounded-lg @error('password') border-red-500 @enderror focus:ring-2 focus:ring-secondary focus:outline-none"
@@ -191,9 +192,9 @@
                         <div class="flex flex-col">
                             <label for="old_password" class="mb-2 font-medium">Password Lama<span
                                     class="text-red-500 text-lg"></span></label>
-                            <input type="old_password" name="old_password" id="old_password"
+                            <input type="password" name="old_password" id="old_password"
                                 class="py-2 px-4 border rounded-lg @error('old_password') border-red-500 @enderror focus:ring-2 focus:ring-secondary focus:outline-none"
-                                value="{{ old('old_password') }}" placeholder="Enter password lama">
+                                placeholder="Enter password lama">
                             @error('old_password')
                                 <span class="text-sm text-red-500 mt-1">{{ $message }}</span>
                             @enderror
