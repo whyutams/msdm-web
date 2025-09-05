@@ -85,6 +85,12 @@
                 </div>
             @endif
 
+            @if ($cerita->suspended)
+                <div class="mb-10 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                    Cerita ini ditangguhkan.
+                </div>
+            @endif
+
             <div class="flex items-center mb-8">
                 <div class="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden">
                     @if($cerita->user->photo_profile)
@@ -107,9 +113,9 @@
             <p class="text-primary"><i class="fas fa-calendar mr-1 mb-4"></i>
                 {{ Carbon::parse($cerita->created_at)->translatedFormat('d M Y') }}</p>
 
-                <p class="text-gray-700 leading-relaxed mb-8 text-lg text-justify break-words whitespace-pre-line">
-                    {{ strip_tags($cerita->cerita) }}
-                </p>
+            <p class="text-gray-700 leading-relaxed mb-8 text-lg text-justify break-words whitespace-pre-line">
+                {{ strip_tags($cerita->cerita) }}
+            </p>
 
             <div class="mt-12 flex lg:justify-between justify-center flex-wrap gap-4">
                 <a href="{{ route('cerita') }}"

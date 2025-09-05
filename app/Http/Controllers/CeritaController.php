@@ -14,7 +14,7 @@ class CeritaController extends Controller
      */
     public function index()
     {
-        $ceritas = Cerita::with('user')->latest()->get();
+        $ceritas = Cerita::with('user')->where('suspended', '!=', '1')->latest()->get();
 
         if (Auth::check() && Auth::user()->role != User::ROLE_USER) {
             return abort('404', 'NOT FOUND');
@@ -116,5 +116,12 @@ class CeritaController extends Controller
     public function d_show(Cerita $cerita)
     {
         return view('dashboard.cerita.show', compact('cerita'));
+    }
+
+    public function toggleSuspend(Cerita $cerita)
+    {
+        $cerita->update(['suspended' => !$cerita->suspended]);
+
+        return redirect()->back()->with('success', 'Cerita ' . ($cerita->suspended ? "Ditangguhkan" : "Diaktifkan") . ".");
     }
 }

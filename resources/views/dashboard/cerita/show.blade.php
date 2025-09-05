@@ -60,6 +60,12 @@
                     </div>
                 </div>
 
+                @if ($cerita->suspended)
+                    <div class="mb-10 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                        Cerita ini ditangguhkan.
+                    </div>
+                @endif
+
                 <p class="text-primary"><i class="fas fa-calendar mr-1 mb-4"></i>
                     {{ \Carbon\Carbon::parse($cerita->created_at)->translatedFormat('d M Y') }}</p>
 

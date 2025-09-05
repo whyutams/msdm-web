@@ -44,8 +44,8 @@
                         </thead>
                         <tbody>
                             @forelse ($ceritas as $index => $cerita)
-                                <tr @if($cerita->user->suspended) title="User dinonaktifkan" @endif
-                                    class="@if($cerita->user->suspended) bg-red-200 hover:bg-red-100 @else hover:bg-gray-50 @endif">
+                                <tr @if($cerita->suspended) title="Cerita ditangguhkan" @endif
+                                    class="@if($cerita->suspended) bg-red-200 hover:bg-red-100 @else hover:bg-gray-50 @endif">
                                     <td class="px-4 py-3 border">{{ $index + 1 }}</td>
                                     <td class="px-4 py-3 border"><code
                                             class="font-bold text-primary">{{ $cerita->user->username }}</code></td>
@@ -63,6 +63,28 @@
                                                     class="inline-flex items-center px-3 py-1 rounded bg-primary text-white hover:bg-blue-800 text-sm">
                                                     <i class="fas fa-eye mr-1"></i> Detail
                                                 </a> 
+                                                <div class="lg:hidden my-1"></div>
+                                                @if ($cerita->suspended)
+                                                    <form title="Aktifkan cerita"
+                                                        action="{{ route('dashboard.cerita.suspend', $cerita->id) }}" method="POST"
+                                                        onsubmit="return confirm('Yakin ingin mengaktifkan cerita?')" class="inline">
+                                                        @csrf
+                                                        <button
+                                                            class="inline-flex items-center px-3 py-1 rounded bg-green-500 text-white hover:bg-green-600 text-sm">
+                                                            <i class="fas fa-unlock mr-1"></i> Unsuspend
+                                                        </button>
+                                                    </form>
+                                                @else
+                                                    <form title="Tangguhkan cerita"
+                                                        action="{{ route('dashboard.cerita.suspend', $cerita->id) }}" method="POST"
+                                                        onsubmit="return confirm('Yakin ingin menangguhkan cerita?')" class="inline">
+                                                        @csrf
+                                                        <button
+                                                            class="inline-flex items-center px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600 text-sm">
+                                                            <i class="fas fa-ban mr-1"></i> Suspend
+                                                        </button>
+                                                    </form>
+                                                @endif
                                         </div>
                                     </td>
 

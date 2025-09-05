@@ -64,6 +64,7 @@ Route::middleware(['auth', 'check.suspended'])->group(function () {
         Route::post('/users/suspend/{user}', [UserController::class, 'toggleSuspend'])->name('users.suspend')->middleware('role:' . User::ROLE_SUPERADMIN);
         Route::resource('/users', UserController::class)->only(['create', 'update', 'store', 'edit', 'destroy'])->names('users')->middleware(['role:' . User::ROLE_SUPERADMIN]);
         Route::resource('/users', UserController::class)->only(['index', 'show'])->names('users')->middleware(['role:' . User::ROLE_SUPERADMIN . ',' . User::ROLE_ADMIN]);
+        Route::post('/cerita/suspend/{cerita}', [CeritaController::class, 'toggleSuspend'])->name('cerita.suspend');
         Route::get('/cerita', [CeritaController::class, 'd_index'])->name('cerita.index');
         Route::get('/cerita/{cerita}', [CeritaController::class, 'd_show'])->name('cerita.show');
     });

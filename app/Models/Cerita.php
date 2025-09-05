@@ -8,7 +8,8 @@ class Cerita extends Model
 {
     protected $fillable = [
         'cerita',
-        'user_id'
+        'suspended',
+        'user_id',
     ];
 
     public function user()

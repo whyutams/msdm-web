@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('ceritas', function (Blueprint $table) {
             $table->id();
             $table->text('cerita');
+            $table->boolean('suspended')->default(false); 
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
