@@ -85,19 +85,60 @@
                         <thead class="bg-gray-100 text-gray-700 uppercase text-sm">
                             <tr>
                                 <th class="px-4 py-3 border w-[5%]">#</th>
+                                <th class="px-4 py-3 border">Materi</th>
                                 <th class="px-4 py-3 border">Judul</th>
-                                <th class="px-4 py-3 border">Jenis Materi</th>
-                                <th class="px-4 py-3 border">Updated At</th>
-                                <th class="px-4 py-3 border">Updated By</th>
+                                <th class="px-4 py-3 border">Jenis Materi</th> 
                                 <th class="px-4 py-3 border">Created At</th>
                                 <th class="px-4 py-3 border">Created By</th>
                                 <th class="px-4 py-3 border w-[20%]">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($subtugas as $index => $sub)
                             <tr>
-                                <td colspan="9" class="px-4 py-4 text-center text-gray-500">No data found.</td>
+                                <td class="px-4 py-3 border">{{ $index + 1 }}</td> 
+                                    <td class="px-4 py-3 border">
+                                        <small
+                                            class="font-medium rounded-md bg-blue-50 text-blue-800 ring-1 ring-inset ring-blue-700/20 text-xs py-1 px-3 block whitespace-normal break-words text-center">
+                                            Materi {{ $sub->urutan }}
+                                        </small>
+                                    </td>
+                                    <td class="px-4 py-3 border">{{ $sub->name }}</td>
+                                    <td class="px-4 py-3 border">{{ ucfirst($sub->jenis == 'file' ? $sub->jenis .' '.$sub->file_type : $sub->jenis) }}</td> 
+                                    <td class="px-4 py-3 border">
+                                        {{  Carbon\Carbon::parse($sub->created_at)->translatedFormat('d M Y') }}
+                                    </td>
+                                    <td class="px-4 py-3 border">{{ $sub->creator?->fullname ?? '-' }}</td>
+                                    <td class="px-4 py-3 border lg:space-x-1">
+
+                                        <div class="flex flex-col lg:flex-row flex-wrap gap-2">
+                                            <a href="{{ route('dashboard.tugas.show', $sub->id) }}"
+                                                class="inline-flex items-center px-3 py-1 rounded bg-primary text-white hover:bg-blue-800 text-sm">
+                                                <i class="fas fa-eye mr-1"></i> Detail
+                                            </a>
+
+                                            @if (Auth::user()->role == App\Models\User::ROLE_ADMIN) 
+                                                <form action="{{ route('dashboard.tugas.materi.destroy', ['tugas'=>$tugas->id,'subTugas'=> $sub->id]) }}" method="POST"
+                                                    onsubmit="return confirm('Yakin ingin hapus materi {{ $sub->urutan }}')" class="inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="inline-flex items-center px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600 text-sm"
+                                                        title="Hapus materi {{ $sub->urutan }}">
+                                                        <i class="fas fa-trash mr-1"></i> Delete
+                                                    </button>
+                                                </form> 
+
+                                            @endif
+                                        </div>
+                                    </td>
+                                </td>
                             </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="9" class="px-4 py-4 text-center text-gray-500">No data found.</td>
+                                </tr>
+                            @endif  
                         </tbody>
                     </table>
                 </div>
@@ -108,7 +149,7 @@
                     <div class="flex items-center gap-2" id="custom-buttons">
                         <div id="btn_excel_wrapper"></div>
                         @if (Auth::user()->role == App\Models\User::ROLE_ADMIN)
-                            <a href="{{ route('dashboard.tugas.create') }}"
+                            <a href="{{ route('dashboard.tugas.materi.create', $tugas->id) }}"
                                 class="inline-flex items-center px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 text-sm">
                                 <i class="fas fa-plus mr-1"></i> Add Materi
                             </a>

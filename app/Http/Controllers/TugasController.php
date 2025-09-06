@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SubTugas;
 use App\Models\Tugas;
 use Auth;
 use Illuminate\Http\Request;
@@ -54,7 +55,9 @@ class TugasController extends Controller
      */
     public function show(Tugas $tugas)
     {
-        return view('dashboard.tugas.show', compact('tugas'));
+        $subtugas = SubTugas::with(['creator'])->where('tugas_id', $tugas->id)->latest()->get();
+
+        return view('dashboard.tugas.show', compact('tugas', 'subtugas'));
     }
 
     /**

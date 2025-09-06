@@ -16,17 +16,18 @@ class SubTugas extends Model
         'content',
         'file_type',
         'file_path',
+        'tugas_id',
         'created_by',
-        'updated_by',
+        //'updated_by',
     ];
+
+    public function tugas()
+    {
+        return $this->belongsTo(Tugas::class, 'tugas_id');
+    }
 
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
-    }
-
-    public function updater()
-    {
-        return $this->belongsTo(User::class, 'updated_by');
     }
 }

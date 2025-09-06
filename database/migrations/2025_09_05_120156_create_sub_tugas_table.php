@@ -18,8 +18,9 @@ return new class extends Migration {
             $table->text('content')->nullable();
             $table->enum('file_type', ['pdf', 'ppt', 'video'])->nullable();
             $table->string('file_path')->nullable();
+            $table->foreignId('tugas_id')->constrained('tugas')->onDelete('cascade');
             $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
-            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null');
+            // $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }

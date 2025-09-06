@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KontakSebayaController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubTugasController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
@@ -69,5 +70,6 @@ Route::middleware(['auth', 'check.suspended'])->group(function () {
         Route::get('/cerita/{cerita}', [CeritaController::class, 'd_show'])->name('cerita.show');
         Route::resource('/tugas', TugasController::class)->parameters(['tugas' => 'tugas'])->only(['create', 'update', 'store', 'edit', 'destroy'])->names('tugas')->middleware(['role:' . User::ROLE_ADMIN]);
         Route::resource('/tugas', TugasController::class)->parameters(['tugas' => 'tugas'])->only(['index', 'show'])->names('tugas')->middleware(['role:' . User::ROLE_SUPERADMIN . ',' . User::ROLE_ADMIN]);
+        Route::resource('/tugas/{tugas}/materi', SubTugasController::class)->parameters(['tugas' => 'tugas'])->parameters(['materi'=>'subTugas'])->names('tugas.materi')->middleware(['role:' . User::ROLE_ADMIN]);
     });
 });
