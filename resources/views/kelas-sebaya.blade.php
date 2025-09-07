@@ -96,10 +96,12 @@
                             <p class="text-sm text-gray-500 mb-6">Nomor: <span
                                     class="font-medium">{{ $kontak_sebaya->number }}</span></p>
                         </div>
-                        <a href="https://wa.me/{{ $kontak_sebaya->number }}" target="_blank"
+                        <a href="https://wa.me/{{ $kontak_sebaya->number }}?text={{ urlencode('Halo, saya ' . Auth::user()->fullname . '. Saya penderita DM Tipe ' . Auth::user()->diabetes_type . ' dan ingin berkonsultasi dengan saudara '.$kontak_sebaya->name.'.') }}"
+                            target="_blank"
                             class="bg-green-500 hover:bg-green-600 text-white text-center font-semibold py-2 px-4 rounded-lg transition">
-                            <i class="fas fa-brands font-normal text-xl fa-whatsapp mr-1"></i> Hubungi via WhatsApp
+                            <i class="fab fa-whatsapp text-xl mr-1"></i> Hubungi via WhatsApp
                         </a>
+
                     </div>
                 @empty
                     </div>

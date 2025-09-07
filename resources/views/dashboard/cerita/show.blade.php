@@ -70,7 +70,7 @@
                     {{ \Carbon\Carbon::parse($cerita->created_at)->translatedFormat('d M Y') }}</p>
 
                 <p class="text-gray-700 leading-relaxed mb-8 text-lg text-justify break-words whitespace-pre-line">
-                    {{ strip_tags($cerita->cerita) }}
+                    {!! $cerita->cerita !!}
                 </p>
 
                 <div class="mt-12 flex lg:justify-between justify-center flex-wrap gap-4">
