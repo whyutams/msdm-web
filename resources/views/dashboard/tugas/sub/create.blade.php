@@ -74,7 +74,7 @@
                                 <select name="jenis" id="jenis"
                                     class="appearance-none w-full py-2 px-4 pr-10 border rounded-lg focus:ring-2 focus:ring-secondary focus:outline-none cursor-pointer">
                                     <option value="text" {{ old('jenis') === 'text' ? 'selected' : '' }}>Text</option>
-                                    <option value="file" {{ old('jenis') === 'file' ? 'selected' : '' }}>File (PDF/PPT)
+                                    <option value="file" {{ old('jenis') === 'file' ? 'selected' : '' }}>File (PPT)
                                     </option>
                                     <option value="link" {{ old('jenis') === 'link' ? 'selected' : '' }}>Youtube Video
                                     </option>
@@ -97,9 +97,9 @@
                         </div>
 
                         <div id="file-wrapper" class="flex flex-col hidden">
-                            <label for="file" class="mb-2 font-medium">Upload File (PDF/PPT) <span
+                            <label for="file" class="mb-2 font-medium">Upload File (PPT) <span
                                     class="text-red-600">*</span></label>
-                            <input type="file" name="file_path" id="file" accept=".pdf,.ppt,.pptx"
+                            <input type="file" name="file_path" id="file" accept=".ppt,.pptx"
                                 class="py-2 px-4 border rounded-lg focus:ring-2 focus:ring-secondary focus:outline-none">
                         </div>
                         
