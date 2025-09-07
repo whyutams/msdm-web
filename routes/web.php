@@ -52,6 +52,8 @@ Route::middleware(['auth', 'check.suspended'])->group(function () {
 
     Route::middleware(['role:' . User::ROLE_USER, 'check.biodata'])->group(function () {
         Route::get('/mytask', [ProfileController::class, 'task'])->name('task');
+        Route::get('/mytask/{subTugas}', [ProfileController::class, 'task_show'])->name('task.show');
+        Route::post('/mytask/{subTugas}', [ProfileController::class, 'task_complete'])->name('task.show.complete');
         Route::get('/kelas-sebaya', [LandingController::class, 'kelas_sebaya'])->name('kelas-sebaya');
         Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
     });
@@ -70,6 +72,8 @@ Route::middleware(['auth', 'check.suspended'])->group(function () {
         Route::get('/cerita/{cerita}', [CeritaController::class, 'd_show'])->name('cerita.show');
         Route::resource('/tugas', TugasController::class)->parameters(['tugas' => 'tugas'])->only(['create', 'update', 'store', 'edit', 'destroy'])->names('tugas')->middleware(['role:' . User::ROLE_ADMIN]);
         Route::resource('/tugas', TugasController::class)->parameters(['tugas' => 'tugas'])->only(['index', 'show'])->names('tugas')->middleware(['role:' . User::ROLE_SUPERADMIN . ',' . User::ROLE_ADMIN]);
-        Route::resource('/tugas/{tugas}/materi', SubTugasController::class)->parameters(['tugas' => 'tugas'])->parameters(['materi'=>'subTugas'])->names('tugas.materi')->middleware(['role:' . User::ROLE_ADMIN]);
+        Route::get('/tugas/{tugas}/materi/{subTugas}/preview', [SubTugasController::class, 'preview'])
+            ->name('tugas.materi.preview');
+        Route::resource('/tugas/{tugas}/materi', SubTugasController::class)->parameters(['tugas' => 'tugas'])->parameters(['materi' => 'subTugas'])->names('tugas.materi')->middleware(['role:' . User::ROLE_ADMIN]);
     });
 });

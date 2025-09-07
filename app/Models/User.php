@@ -125,4 +125,10 @@ class User extends Authenticatable
         'ada',
         'tidak_ada',
     ];
+
+    public function tugas_selesais()
+    {
+        return $this->hasMany(TugasSelesai::class, 'user_id');
+    }
+
 }

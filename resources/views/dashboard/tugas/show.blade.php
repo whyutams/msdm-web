@@ -112,14 +112,14 @@
                                     <td class="px-4 py-3 border lg:space-x-1">
 
                                         <div class="flex flex-col lg:flex-row flex-wrap gap-2">
-                                            <a href="{{ route('dashboard.tugas.show', $sub->id) }}"
+                                            <a href="{{ route('dashboard.tugas.materi.show', ['tugas'=>$tugas->id,'subTugas'=> $sub->id]) }}"
                                                 class="inline-flex items-center px-3 py-1 rounded bg-primary text-white hover:bg-blue-800 text-sm">
                                                 <i class="fas fa-eye mr-1"></i> Detail
                                             </a>
 
                                             @if (Auth::user()->role == App\Models\User::ROLE_ADMIN) 
                                                 <form action="{{ route('dashboard.tugas.materi.destroy', ['tugas'=>$tugas->id,'subTugas'=> $sub->id]) }}" method="POST"
-                                                    onsubmit="return confirm('Yakin ingin hapus materi {{ $sub->urutan }}')" class="inline">
+                                                    onsubmit="return confirm('Yakin ingin hapus materi {{ $sub->urutan }} ?')" class="inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"

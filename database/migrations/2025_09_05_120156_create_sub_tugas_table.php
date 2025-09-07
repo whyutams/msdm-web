@@ -14,10 +14,11 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->integer('urutan');
-            $table->enum('jenis', ['text', 'file']);
+            $table->enum('jenis', ['text', 'file', 'link']);
             $table->text('content')->nullable();
-            $table->enum('file_type', ['pdf', 'ppt', 'video'])->nullable();
+            $table->enum('file_type', ['pdf', 'ppt', 'pptx'])->nullable();
             $table->string('file_path')->nullable();
+            $table->string('link')->nullable();
             $table->foreignId('tugas_id')->constrained('tugas')->onDelete('cascade');
             $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
             // $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null');

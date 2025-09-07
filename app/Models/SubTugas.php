@@ -16,6 +16,7 @@ class SubTugas extends Model
         'content',
         'file_type',
         'file_path',
+        'link',
         'tugas_id',
         'created_by',
         //'updated_by',

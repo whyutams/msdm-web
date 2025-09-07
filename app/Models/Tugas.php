@@ -26,4 +26,10 @@ class Tugas extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    public function sub_tugas()
+    {
+        return $this->hasMany(SubTugas::class, 'tugas_id');
+    }
+
 }

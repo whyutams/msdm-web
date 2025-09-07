@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SubTugas;
 use App\Models\Tugas;
+use App\Models\TugasSelesai;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -128,10 +130,54 @@ class ProfileController extends Controller
 
     public function task()
     {
-        $tasks = Tugas::with('creator','updater')->latest()->get();
+        $tasks = Tugas::with('creator', 'updater', 'sub_tugas')
+            ->orderBy('minggu')
+            ->get();
 
-        return view('user.task', compact('tasks'));
+        $user_completed = TugasSelesai::where('user_id', auth()->id())
+            ->pluck('materi_id')
+            ->toArray();
+
+        return view('user.task', compact('tasks', 'user_completed'));
     }
+
+    public function task_show(SubTugas $subTugas)
+    {
+        $materi = $subTugas;
+        $minggu = Tugas::where('id', $subTugas->tugas_id)->first()->minggu;
+
+        $user_completed = auth()->user()->tugas_selesais()->pluck('materi_id')->toArray();
+
+        $embedUrl = null;
+        if ($materi->jenis === 'link' && $materi->link) {
+            if (preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^\&\?\/]+)/', $materi->link, $matches)) {
+                $embedUrl = 'https://www.youtube.com/embed/' . $matches[1];
+            }
+        }
+
+        return view('user.task-show', compact('materi', 'minggu', 'user_completed', 'embedUrl'));
+    }
+
+    public function task_complete(SubTugas $subTugas)
+    {
+        $user = Auth::user();
+
+        $exists = TugasSelesai::where('user_id', $user->id)
+            ->where('materi_id', $subTugas->id)
+            ->exists();
+
+        if (!$exists) {
+            TugasSelesai::create([
+                'user_id' => $user->id,
+                'materi_id' => $subTugas->id,
+                'tugas_id' => $subTugas->tugas_id,
+            ]);
+        }
+
+        return redirect()->route('task.show', $subTugas->id)
+            ->with('success', 'Materi telah ditandai selesai.');
+    }
+
 
     public function biodata_edit()
     {

@@ -86,6 +86,12 @@
                         hiddenInput.value = quill.root.innerHTML;
                     });
                 }
+
+                $(`#${id}-form`).on('submit', function () {
+                    $(`#${id}-input`).val(quill.root.innerHTML);
+
+                    return false;
+                });
             });
         });
     </script>

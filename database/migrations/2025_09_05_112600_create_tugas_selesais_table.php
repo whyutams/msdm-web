@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('tugas_selesais', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tugas_id')->constrained('tugas')->onDelete('cascade');
+            $table->foreignId('materi_id')->constrained('sub_tugas')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

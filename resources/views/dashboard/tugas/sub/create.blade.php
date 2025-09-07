@@ -47,7 +47,7 @@
                 </div>
 
                 <div>
-                    <form action="{{ route('dashboard.tugas.materi.store', $tugas->id) }}" method="POST"
+                    <form action="{{ route('dashboard.tugas.materi.store', $tugas->id) }}" method="POST" onsubmit="confirm('Apakah materi sudah sesuai?')"
                         enctype="multipart/form-data" class="space-y-4">
                         @csrf
 
@@ -73,8 +73,11 @@
                             <div class="relative">
                                 <select name="jenis" id="jenis"
                                     class="appearance-none w-full py-2 px-4 pr-10 border rounded-lg focus:ring-2 focus:ring-secondary focus:outline-none cursor-pointer">
-                                    <option value="text" selected>Text</option>
-                                    <option value="file">File (PDF/PPT)</option>
+                                    <option value="text" {{ old('jenis') === 'text' ? 'selected' : '' }}>Text</option>
+                                    <option value="file" {{ old('jenis') === 'file' ? 'selected' : '' }}>File (PDF/PPT)
+                                    </option>
+                                    <option value="link" {{ old('jenis') === 'link' ? 'selected' : '' }}>Youtube Video
+                                    </option>
                                 </select>
                                 <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
                                     <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="2"
@@ -85,8 +88,7 @@
                             </div>
                         </div>
 
-
-                        <div id="content-wrapper" class="flex flex-col">
+                        <div id="content-wrapper" class="flex flex-col hidden">
                             <label for="content" class="mb-2 font-medium">Content <span
                                     class="text-red-600">*</span></label>
                             <textarea name="content" id="summernote" rows="4"
@@ -95,13 +97,23 @@
                         </div>
 
                         <div id="file-wrapper" class="flex flex-col hidden">
-                            <label for="file" class="mb-2 font-medium">Upload File (PDF/PPT) <span class="text-red-600">*</span></label>
-                            <input type="file" name="file" id="file" accept=".pdf,.ppt,.pptx"
+                            <label for="file" class="mb-2 font-medium">Upload File (PDF/PPT) <span
+                                    class="text-red-600">*</span></label>
+                            <input type="file" name="file_path" id="file" accept=".pdf,.ppt,.pptx"
                                 class="py-2 px-4 border rounded-lg focus:ring-2 focus:ring-secondary focus:outline-none">
+                        </div>
+                        
+                        <div id="link-wrapper" class="flex flex-col hidden">
+                            <label for="link" class="mb-2 font-medium">Youtube Link <span
+                                    class="text-red-600">*</span></label>
+                            <input type="url" name="link" id="link"
+                                class="py-2 px-4 border rounded-lg focus:ring-2 focus:ring-secondary focus:outline-none"
+                                value="{{ old('link') }}" placeholder="https://youtube.com/...">
+                            <span class="text-slate-500 text-sm mt-1">Note: Pastikan link yang diberikan bersifat publik.</span>
                         </div>
 
                         <div class="flex justify-end space-x-2">
-                            <a href="{{ url('dashboard/tugas') }}"
+                            <a href="{{ url('dashboard/tugas', $tugas->id) }}"
                                 class="inline-flex items-center px-4 py-2 rounded bg-gray-500 text-white hover:bg-gray-600">
                                 Back
                             </a>
@@ -120,26 +132,20 @@
     <script>
         $(document).ready(function () {
             function toggleJenis() {
-                if ($('#jenis').val() === 'text') {
+                let jenis = $('#jenis').val();
+
+                $('#content-wrapper, #file-wrapper, #link-wrapper').addClass('hidden')
+                    .find('textarea, input').prop('disabled', true).prop('required', false);
+
+                if (jenis === 'text') {
                     $('#content-wrapper').removeClass('hidden');
-                    $('#summernote')
-                        .prop('disabled', false)
-                        .prop('required', true);
-
-                    $('#file-wrapper').addClass('hidden');
-                    $('#file')
-                        .prop('disabled', true)
-                        .prop('required', false);
-                } else {
+                    $('#summernote').prop('disabled', false).prop('required', true);
+                } else if (jenis === 'file') {
                     $('#file-wrapper').removeClass('hidden');
-                    $('#file')
-                        .prop('disabled', false)
-                        .prop('required', true);
-
-                    $('#content-wrapper').addClass('hidden');
-                    $('#summernote')
-                        .prop('disabled', true)
-                        .prop('required', false);
+                    $('#file').prop('disabled', false).prop('required', true);
+                } else if (jenis === 'link') {
+                    $('#link-wrapper').removeClass('hidden');
+                    $('#link').prop('disabled', false).prop('required', true);
                 }
             }
 
@@ -150,5 +156,6 @@
             });
         });
     </script>
+
 
 @endsection

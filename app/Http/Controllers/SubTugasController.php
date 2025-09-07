@@ -6,6 +6,7 @@ use App\Models\Tugas;
 use App\Models\SubTugas;
 use Auth;
 use Illuminate\Http\Request;
+use Storage;
 
 class SubTugasController extends Controller
 {
@@ -32,33 +33,81 @@ class SubTugasController extends Controller
      */
     public function store(Request $request, Tugas $tugas)
     {
-        $last_urutan = SubTugas::where('tugas_id', $tugas->id)->get()->count();
+        $last_urutan = SubTugas::where('tugas_id', $tugas->id)->count();
 
         $validated = $request->validate([
             'name' => 'required|max:255',
-            'jenis' => 'required|in:text,file',
+            'jenis' => 'required|in:text,file,link',
             'content' => 'nullable',
-            'file_type' => 'nullable|in:pdf,ppt,video',
+            'file_type' => 'nullable|in:pdf,ppt,pptx',
             'file_path' => 'nullable',
+            'link' => 'nullable|url',
         ]);
 
         $validated['urutan'] = $last_urutan + 1;
         $validated['tugas_id'] = $tugas->id;
         $validated['created_by'] = Auth::id();
-        // $validated['updated_by'] = Auth::id();
+
+        if ($request->jenis == 'text') {
+            $validated['content'] = $request['content'];
+            $validated['file_path'] = null;
+            $validated['file_type'] = null;
+
+        } else if ($request->jenis == 'file') {
+            if ($request->hasFile('file_path')) {
+                $file = $request->file('file_path');
+                $extension = strtolower($file->getClientOriginalExtension());
+
+                if (!in_array($extension, ['pdf', 'ppt', 'pptx'])) {
+                    return back()->with('error', 'Format file hanya pdf, ppt, atau pptx.');
+                }
+
+                $path = $file->storeAs('materi', time() . '.' . $extension, 'public');
+
+                $validated['file_path'] = $path;
+                $validated['file_type'] = $extension;
+                $validated['content'] = null;
+            }
+
+        } else if ($request->jenis == 'link') {
+            $validated['file_type'] = null;
+            $validated['content'] = null;
+
+            $validated['link'] = $request->input('link');
+        }
 
         SubTugas::create($validated);
 
-        return redirect()->route('dashboard.tugas.show', $tugas->id)->with('success', 'Materi berhasil ditambahkan.');
+        return redirect()
+            ->route('dashboard.tugas.show', $tugas->id)
+            ->with('success', 'Materi berhasil ditambahkan.');
     }
+
 
     /**
      * Display the specified resource.
      */
-    public function show(SubTugas $subTugas)
+    public function show(Tugas $tugas, SubTugas $subTugas)
     {
-        //
+        $fileUrl = null;
+        $embedUrl = null;
+
+        if ($subTugas->jenis === 'file' && $subTugas->file_path) {
+            $fileUrl = url('storage/' . $subTugas->file_path);
+        }
+
+        if ($subTugas->jenis === 'link' && $subTugas->link) {
+            $embedUrl = $this->getYoutubeEmbedUrl($subTugas->link);
+        }
+
+        return view('dashboard.tugas.sub.show', [
+            'tugas' => $tugas,
+            'materi' => $subTugas,
+            'fileUrl' => $fileUrl,
+            'embedUrl' => $embedUrl,
+        ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -91,4 +140,35 @@ class SubTugasController extends Controller
 
         return redirect()->route('dashboard.tugas.show', $tugas->id)->with('success', 'Materi ' . $subTugas->urutan . ' berhasil dihapus.');
     }
+
+    public function preview(Tugas $tugas, SubTugas $subTugas)
+    {
+        $fullPath = storage_path('app/public/' . $subTugas->file_path);
+
+        if (!file_exists($fullPath)) {
+            abort(404, 'File tidak ditemukan.');
+        }
+
+        return response()->stream(function () use ($fullPath) {
+            readfile($fullPath);
+        }, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . basename($fullPath) . '"',
+        ]);
+    }
+
+
+    private function getYoutubeEmbedUrl($url)
+    {
+        $pattern = '%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i';
+
+        if (preg_match($pattern, $url, $matches)) {
+            return 'https://www.youtube.com/embed/' . $matches[1];
+        }
+
+        return null;
+    }
+
+
+
 }
