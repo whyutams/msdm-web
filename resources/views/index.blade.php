@@ -106,7 +106,7 @@
 
     @endauth
     <div
-        class="relative z-10 max-w-6xl mx-auto text-center px-6 sm:px-8 lg:px-12 @auth @if($nextTask && $nextSub) @endauth mt-64 lg:mt-0 @endif">
+        class="relative z-10 max-w-6xl mx-auto text-center px-6 sm:px-8 lg:px-12 @auth @if($nextTask && $nextSub) mt-64 lg:mt-0 @endif @endauth">
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-12 leading-tight">
             {{ config('app.name') }}
             <span class="text-secondary block mt-6">Belajar dari Kisah Nyata, Terinspirasi untuk Berubah</span>
