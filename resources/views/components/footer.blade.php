@@ -38,7 +38,7 @@
 
                 <div>
                     <h4 class="text-xl font-semibold text-gray-800 mb-4">Contact Us</h4>
-                    <p class="text-gray-600 mb-4">Email: msdm2025@gmail.com</p>
+                    <p class="text-gray-600 mb-4">Email: </p>
                     <div class="flex justify-start space-x-5">
                         <a href="#" class="text-gray-500 hover:text-primary transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor"

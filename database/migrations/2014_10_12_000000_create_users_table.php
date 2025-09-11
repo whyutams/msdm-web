@@ -31,7 +31,7 @@ return new class extends Migration {
             $table->enum('pengobatan_dm', User::PENGOBATAN_DM)->nullable();
             $table->enum('riwayat_keluarga', User::RIWAYAT_KELUARGA)->nullable();
 
-            $table->string('username', 50)->unique();
+            $table->string('username')->unique();
             $table->string('password');
             $table->enum('role', [User::ROLE_USER, User::ROLE_ADMIN, User::ROLE_SUPERADMIN])->default('user');
             $table->boolean('suspended')->default(false); 

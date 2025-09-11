@@ -80,12 +80,12 @@
                                             </svg>
                                         </button>
 
-                                        <div class="materiList mt-3 hidden border border-gray-200 rounded-lg overflow-hidden">
+                                        <div class="materiList mt-3 hidden border border-gray-200 rounded-lg overflow-x-auto">
                                             <table class="w-full table-auto text-left border-collapse">
                                                 <tbody>
                                                     @foreach ($task->sub_tugas as $index => $sub)
-                                                        <tr
-                                                            class="border-b @if(in_array($sub->id, $user_completed)) bg-green-300 border-green-400 hover:bg-green-200 @else border-gray-200 hover:bg-gray-50 @endif">
+                                                        <tr onclick="window.location = '{{ route('task.show', $sub->id) }}'"
+                                                            class="border-b cursor-pointer @if(in_array($sub->id, $user_completed)) bg-green-300 border-green-400 hover:bg-green-200 @else border-gray-200 hover:bg-gray-50 @endif">
                                                             <td class="px-4 py-2 text-slate-500" width="5%">{{ $index + 1 }}</td>
                                                             <td class="px-4 py-2 text-gray-800">{{ $sub->name }}</td>
                                                             <td class="px-4 py-2 w-12 text-center">
@@ -94,17 +94,7 @@
                                                                 @else
                                                                     ❌
                                                                 @endif
-                                                            </td>
-                                                            <td class="px-4 py-2 w-32 text-center">
-                                                                <a href="{{ route('task.show', $sub->id) }}"
-                                                                    class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
-                                                                    @if(!in_array($sub->id, $user_completed))
-                                                                        Selesaikan
-                                                                    @else
-                                                                        Lihat
-                                                                    @endif
-                                                                </a>
-                                                            </td>
+                                                            </td> 
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

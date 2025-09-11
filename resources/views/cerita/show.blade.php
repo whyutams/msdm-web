@@ -79,9 +79,9 @@
                             </p>
                         </div>
 
-                        <div class="flex items-center">
+                        <div class="lg:flex items-center">
                             <a href="{{ route('task.show', $nextSub->id) }}"
-                                class="text-secondary font-semibold hover:underline whitespace-nowrap">
+                                class="text-secondary font-semibold hover:underline">
                                 Selesaikan Tugas
                             </a>
                         </div>
@@ -155,7 +155,7 @@
             <p class="text-primary"><i class="fas fa-calendar mr-1 mb-4"></i>
                 {{ Carbon::parse($cerita->created_at)->translatedFormat('d M Y') }}</p>
 
-            <div class="prose max-w-full text-justify">
+            <div class="prose max-w-full text-justify break-words [&_img]:max-w-full [&_img]:h-auto [&_table]:w-full [&_table]:block [&_pre]:whitespace-pre-wrap">
                 {!! $cerita->cerita !!}
             </div>
 

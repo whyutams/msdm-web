@@ -67,7 +67,7 @@ class LandingController extends Controller
             'address' => 'nullable|string',
             'gender' => 'string|in:' . implode(',', User::GENDER),
             'birth_date' => 'required|date',
-            'username' => 'required|string|min:6|max:50|unique:users',
+            'username' => 'required|string|min:6|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
 

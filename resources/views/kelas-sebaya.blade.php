@@ -74,9 +74,9 @@
                             </p>
                         </div>
 
-                        <div class="flex items-center">
+                        <div class="lg:flex items-center">
                             <a href="{{ route('task.show', $nextSub->id) }}"
-                                class="text-secondary font-semibold hover:underline whitespace-nowrap">
+                                class="text-secondary font-semibold hover:underline">
                                 Selesaikan Tugas
                             </a>
                         </div>

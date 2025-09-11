@@ -43,7 +43,7 @@
                         </div>
                     @elseif(in_array($materi->file_type, ['ppt', 'pptx']))
                         <iframe
-                            src="https://docs.google.com/gview?url={{ urlencode(asset('storage/' . $materi->file_path)) }}&embedded=true"
+                            src="https://docs.google.com/gview?url={{ urlencode(url('storage/' . $materi->file_path)) }}&embedded=true"
                             class="w-full h-[600px] border rounded">
                         </iframe>
                     @endif

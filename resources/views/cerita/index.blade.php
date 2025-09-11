@@ -79,9 +79,8 @@
                             </p>
                         </div>
 
-                        <div class="flex items-center">
-                            <a href="{{ route('task.show', $nextSub->id) }}"
-                                class="text-secondary font-semibold hover:underline whitespace-nowrap">
+                        <div class="lg:flex items-center">
+                            <a href="{{ route('task.show', $nextSub->id) }}" class="text-secondary font-semibold hover:underline">
                                 Selesaikan Tugas
                             </a>
                         </div>
@@ -136,16 +135,16 @@
                     Dari pengalaman ini, kita bisa belajar, termotivasi, dan saling menguatkan untuk hidup lebih sehat. </p>
             </div>
 
-            <div class="flex justify-between items-center mb-12">
-                <div>
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-12">
+                <div class="mx-auto lg:mx-0">
                     @auth
-                        <a href="{{url('/cerita/add')}}"
-                            class="bg-primary text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-blue-800 hover:shadow-lg transition-all duration-200">
+                        <a href="{{ url('/cerita/add') }}"
+                            class="bg-primary text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-blue-800 hover:shadow-lg transition-all duration-200 w-full lg:w-auto text-center block">
                             <i class="fas fa-pen mr-2"></i>Tulis Cerita
                         </a>
                     @endauth
                 </div>
-                <div class="w-1/2 lg:w-auto">
+                <div class="w-full lg:w-auto">
                     <input type="text" id="search"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
                         placeholder="Cari ...">
@@ -180,16 +179,17 @@
                             {{ strip_tags($cerita->cerita) }}
                         </p>
 
-                        <div class="flex justify-between">
-                            <div>
-                                <a href="{{url('/cerita/' . $cerita->id)}}"
-                                    class="bg-secondary text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-blue-600 hover:shadow-lg transition-all duration-200 w-full">
-                                    Lihat Selengkapnya
-                                </a>
-                            </div>
-                            <small class="text-primary"><i class="fas fa-calendar mr-1"></i>
-                                {{ Carbon::parse($cerita->created_at)->translatedFormat('d M Y') }}</small>
+                        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-3">
+                            <a href="{{ url('/cerita/' . $cerita->id) }}"
+                                class="bg-secondary text-white px-8 py-3 rounded-xl text-base font-semibold hover:bg-blue-600 hover:shadow-lg transition-all duration-200 w-full lg:w-auto text-center block">
+                                Lihat Selengkapnya
+                            </a>
+                            <small class="text-primary lg:text-start mx-auto lg:mx-0">
+                                <i class="fas fa-calendar mr-1"></i>
+                                {{ Carbon::parse($cerita->created_at)->translatedFormat('d M Y') }}
+                            </small>
                         </div>
+
                     </div>
                 @empty
                     <div class="flex flex-col justify-center pt-16 col-span-3">

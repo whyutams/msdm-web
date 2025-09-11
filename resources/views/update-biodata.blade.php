@@ -242,12 +242,7 @@
                     class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold text-lg hover:bg-blue-700 transition">
                     Submit
                 </button>
-            </form>
-
-            <p class="text-center text-gray-600 text-base mt-6">
-                Sudah punya akun?
-                <a href="{{ url('/login') }}" class="text-blue-600 font-semibold hover:underline">Login</a>
-            </p>
+            </form> 
         </div>
     </div>
 
