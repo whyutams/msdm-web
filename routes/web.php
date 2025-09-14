@@ -74,6 +74,6 @@ Route::middleware(['auth', 'check.suspended'])->group(function () {
         Route::resource('/tugas', TugasController::class)->parameters(['tugas' => 'tugas'])->only(['index', 'show'])->names('tugas')->middleware(['role:' . User::ROLE_SUPERADMIN . ',' . User::ROLE_ADMIN]);
         Route::get('/tugas/{tugas}/materi/{subTugas}/preview', [SubTugasController::class, 'preview'])
             ->name('tugas.materi.preview');
-        Route::resource('/tugas/{tugas}/materi', SubTugasController::class)->parameters(['tugas' => 'tugas'])->parameters(['materi' => 'subTugas'])->names('tugas.materi')->middleware(['role:' . User::ROLE_ADMIN]);
+        Route::resource('/tugas/{tugas}/materi', SubTugasController::class)->parameters(['tugas' => 'tugas'])->parameters(['materi' => 'subTugas'])->names('tugas.materi')->middleware(['role:' . User::ROLE_SUPERADMIN . ',' . User::ROLE_ADMIN]);
     });
 });
