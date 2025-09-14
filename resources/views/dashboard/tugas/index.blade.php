@@ -107,38 +107,40 @@
         </div>
     </section>
 
-    <script>
-        $(function () {
-            const table = $("#table").DataTable({
-                responsive: false,
-                lengthChange: true,
-                autoWidth: false,
-                paging: true,
-                searching: true,
-                ordering: true,
-                info: true,
-                buttons: [],
-                language: {
-                    lengthMenu: "Tampilkan _MENU_ data per halaman",
-                    zeroRecords: "<div class='flex justify-center py-2'><span class='text-center mx-auto'>Data tidak ditemukan</span></div>",
-                    info: "Menampilkan _START_-_END_ dari total _TOTAL_",
-                    infoEmpty: "Tidak ada data tersedia",
-                    infoFiltered: "(difilter dari total _MAX_ data)",
-                    search: "Cari:",
-                    paginate: {
-                        first: "<<",
-                        last: ">>",
-                        next: "›",
-                        previous: "‹"
+    @if ($tugass->count() > 0)
+        <script>
+            $(function () {
+                const table = $("#table").DataTable({
+                    responsive: false,
+                    lengthChange: true,
+                    autoWidth: false,
+                    paging: true,
+                    searching: true,
+                    ordering: true,
+                    info: true,
+                    buttons: [],
+                    language: {
+                        lengthMenu: "Tampilkan _MENU_ data per halaman",
+                        zeroRecords: "<div class='flex justify-center py-2'><span class='text-center mx-auto'>Data tidak ditemukan</span></div>",
+                        info: "Menampilkan _START_-_END_ dari total _TOTAL_",
+                        infoEmpty: "Tidak ada data tersedia",
+                        infoFiltered: "(difilter dari total _MAX_ data)",
+                        search: "Cari:",
+                        paginate: {
+                            first: "<<",
+                            last: ">>",
+                            next: "›",
+                            previous: "‹"
+                        }
                     }
-                }
+                });
+
+
+                const wrapper = $('#table').parents('.dataTables_wrapper');
+                wrapper.find('.dataTables_length').appendTo('#custom-length');
+                wrapper.find('.dataTables_info').appendTo('#custom-info');
+                wrapper.find('.dataTables_paginate').appendTo('#custom-paginate');
             });
-
-
-            const wrapper = $('#table').parents('.dataTables_wrapper');
-            wrapper.find('.dataTables_length').appendTo('#custom-length');
-            wrapper.find('.dataTables_info').appendTo('#custom-info');
-            wrapper.find('.dataTables_paginate').appendTo('#custom-paginate');
-        });
-    </script>
+        </script>
+    @endif
 @endsection
