@@ -29,6 +29,19 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <!-- DataTables Core + Tailwind CSS theme -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.3/css/dataTables.tailwindcss.min.css">
+    <script src="https://cdn.datatables.net/2.1.3/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.3/js/dataTables.tailwindcss.min.js"></script>
+
+    <!-- DataTables Buttons extension -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.1.1/css/buttons.dataTables.min.css">
+    <script src="https://cdn.datatables.net/buttons/3.1.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.1/js/buttons.html5.min.js"></script>
+
+    <!-- JSZip (wajib untuk export Excel) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
 
 <body class="bg-gray-50">
@@ -74,7 +87,7 @@
     <script>
         $(document).ready(function () {
             // Quill Editor
-            const quillEditors = ['summernote', 'summernote2'];  
+            const quillEditors = ['summernote', 'summernote2'];
             quillEditors.forEach(id => {
                 const quillContainer = document.getElementById(id);
 
@@ -83,7 +96,7 @@
                     const quillDiv = document.createElement('div');
                     quillDiv.id = id + '-quill';
                     quillDiv.className = 'bg-white h-64 rounded-lg border';
-                    quillDiv.innerHTML = quillContainer.value;  
+                    quillDiv.innerHTML = quillContainer.value;
                     parent.replaceChild(quillDiv, quillContainer);
 
                     const hiddenInput = document.createElement('input');

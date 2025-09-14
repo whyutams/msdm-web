@@ -92,8 +92,7 @@
 
                 <div class="flex flex-col md:flex-row items-center justify-between gap-4 mt-4 text-sm"
                     id="datatable-footer-custom">
-                    <div id="custom-info" class="text-gray-600"></div>
-                    <div id="custom-paginate"></div>
+                    <div id="custom-paginate" class="flex items-center"></div>
                     <div class="flex items-center gap-2" id="custom-buttons">
                         <div id="btn_excel_wrapper"></div>
                         @if (Auth::user()->role == App\Models\User::ROLE_ADMIN)
@@ -112,26 +111,32 @@
         $(function () {
             const table = $("#table").DataTable({
                 responsive: false,
-                lengthChange: false,
+                lengthChange: true,
                 autoWidth: false,
                 paging: true,
                 searching: true,
                 ordering: true,
                 info: true,
-                buttons: [
-                    {
-                        extend: 'excel',
-                        text: '<i class="fas fa-download"></i>&nbsp; Export to Excel',
-                        className: 'bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded',
-                        exportOptions: {
-                            columns: [0, 1, 2, 3, 5]
-                        }
+                buttons: [],
+                language: {
+                    lengthMenu: "Tampilkan _MENU_ data per halaman",
+                    zeroRecords: "<div class='flex justify-center py-2'><span class='text-center mx-auto'>Data tidak ditemukan</span></div>",
+                    info: "Menampilkan _START_-_END_ dari total _TOTAL_",
+                    infoEmpty: "Tidak ada data tersedia",
+                    infoFiltered: "(difilter dari total _MAX_ data)",
+                    search: "Cari:",
+                    paginate: {
+                        first: "<<",
+                        last: ">>",
+                        next: "›",
+                        previous: "‹"
                     }
-                ]
+                }
             });
 
-            table.buttons().container().appendTo('#btn_excel_wrapper');
+
             const wrapper = $('#table').parents('.dataTables_wrapper');
+            wrapper.find('.dataTables_length').appendTo('#custom-length');
             wrapper.find('.dataTables_info').appendTo('#custom-info');
             wrapper.find('.dataTables_paginate').appendTo('#custom-paginate');
         });
